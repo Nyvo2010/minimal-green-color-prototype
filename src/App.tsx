@@ -149,7 +149,7 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
     <div className={`${surface} px-6 py-16 sm:px-10`}>
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex items-end justify-between">
-          <h2 className="serif text-5xl sm:text-6xl">{dark ? "Dark mode" : "Light mode"}</h2>
+          <h2 className="serif text-5xl sm:text-6xl">{dark ? "Dark mode preview" : "Light mode preview"}</h2>
           <p className="text-sm opacity-50">
             {dark ? "Ink bg · ink box or paper box" : "White bg · paper box or ink box"}
           </p>
@@ -385,7 +385,7 @@ export default function App() {
 
         <div className="mt-12 grid gap-3 md:grid-cols-2">
           <div className="rounded-2xl bg-paper-box p-7">
-            <Label>Display · Fraunces</Label>
+            <Label>Display · Newsreader</Label>
             <p className="serif text-6xl leading-none">
               Aa <span className="italic text-forest">Aa</span>
             </p>
