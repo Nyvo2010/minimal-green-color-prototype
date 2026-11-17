@@ -1,0 +1,16 @@
+/* v2 Theme - New Palette */
+:root[data-version="v2"] {
+  --color-ink: #121213;
+  --color-ink-box: #1f1f21;
+  --color-paper: #faf9f6;
+  --color-paper-box: #f0efe9;
+  --color-forest: #2d775b;
+  --color-moss: #68ad90;
+
+  --grad-base: #2d775b;
+  --grad-main-dark: #2d775b;
+  --grad-main-light: #68ad90;
+  --grad-accent-green: #a7c790;
+  --grad-accent-pink: #fcdcf4;
+  --grad-accent-cyan: #daf6fd;
+}

@@ -1,8 +1,18 @@
 import { useState, type ReactNode } from "react";
+import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation, NavLink } from "react-router-dom";
 
 /* ---------------- Spec data ---------------- */
 
-const colors = [
+const v1Colors = [
+  { name: "Ink", role: "Dark bg · or box on white", hex: "#121213", cls: "bg-ink text-paper" },
+  { name: "Ink box", role: "Box on light", hex: "#1F1F21", cls: "bg-ink-box text-paper" },
+  { name: "White", role: "Light bg", hex: "#FFFFFF", cls: "bg-paper text-ink ring-1 ring-ink/10" },
+  { name: "Paper box", role: "Box on light · or on dark", hex: "#F2F2F3", cls: "bg-paper-box text-ink" },
+  { name: "Forest", role: "Green, dark", hex: "#2C5F2D", cls: "bg-forest text-paper" },
+  { name: "Moss", role: "Green, light", hex: "#97BC62", cls: "bg-moss text-ink" },
+];
+
+const v2Colors = [
   { name: "Ink", role: "Dark bg · or box on white", hex: "#121213", cls: "bg-ink text-paper" },
   { name: "Ink box", role: "Box on light", hex: "#1F1F21", cls: "bg-ink-box text-paper" },
   { name: "Paper", role: "Light bg (warm)", hex: "#FAF9F6", cls: "bg-paper text-ink ring-1 ring-ink/10" },
@@ -11,7 +21,14 @@ const colors = [
   { name: "Moss", role: "Green, light (v2)", hex: "#68AD90", cls: "bg-moss text-ink" },
 ];
 
-const splashes = [
+const v1Splashes = [
+  { name: "Pink", hex: "#F4A9C4" },
+  { name: "Orange", hex: "#F6A25E" },
+  { name: "Lilac", hex: "#BDA9F2" },
+  { name: "Sky", hex: "#A5D8F0" },
+];
+
+const v2Splashes = [
   { name: "Accent Green", hex: "#A7C790" },
   { name: "Accent Pink", hex: "#FCDCF4" },
   { name: "Accent Cyan", hex: "#DAF6FD" },
@@ -31,7 +48,6 @@ function Label({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-xs uppercase tracking-[0.14em] opacity-50">{children}</p>;
 }
 
-/* Small mono label used by the dimension marks */
 function DimLabel({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <span
@@ -42,7 +58,6 @@ function DimLabel({ children, className = "" }: { children: ReactNode; className
   );
 }
 
-/* Dashed inset that marks where the content box starts inside a card */
 function PadInset({ inset = "inset-6", rounded = "rounded-2xl" }: { inset?: string; rounded?: string }) {
   return (
     <span
@@ -52,18 +67,14 @@ function PadInset({ inset = "inset-6", rounded = "rounded-2xl" }: { inset?: stri
   );
 }
 
-/* ---------------- Bento schematic ----------------
-   Two cards on one grid. The gutter is a real grid track, so the dimension
-   mark sits exactly on the card edges. Padding and radii are drawn as
-   dimension marks inside the padding lanes, never over the content. */
+/* ---------------- Bento schematic ---------------- */
 
 function BentoSchematic() {
   return (
     <div className="mt-12">
-      <Label>Layout · bento &amp; spacing</Label>
+      <Label>Layout · bento & spacing</Label>
       <div className="rounded-3xl bg-paper-box p-6 sm:p-8">
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-[1fr_1rem_1fr]">
-          {/* gutter dimension — lives in the gutter track itself */}
           <div className="hidden sm:block" aria-hidden />
           <div className="relative hidden h-6 items-end justify-center sm:flex">
             <DimLabel className="absolute top-0 left-1/2 -translate-x-1/2">gap 16</DimLabel>
@@ -75,14 +86,12 @@ function BentoSchematic() {
           <div className="relative rounded-3xl bg-paper p-7">
             <PadInset inset="inset-7" />
 
-            {/* outer radius */}
             <span
               aria-hidden
               className="pointer-events-none absolute left-0 top-0 h-6 w-6 rounded-tl-3xl border-l border-t border-forest/40"
             />
             <DimLabel className="absolute left-7 top-3.5 -translate-y-1/2">r 24</DimLabel>
 
-            {/* top padding */}
             <div className="pointer-events-none absolute left-1/2 top-0 flex h-7 -translate-x-1/2 items-center">
               <span className="relative h-7 w-px bg-forest/40">
                 <span className="absolute left-1/2 top-0 h-px w-1.5 -translate-x-1/2 bg-forest/40" />
@@ -128,11 +137,9 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
   const [tab, setTab] = useState("Day");
   const [check, setCheck] = useState(true);
 
-  // page surface, regular box, and the inverted box that also works on it
   const surface = dark ? "bg-ink text-paper" : "bg-paper text-ink";
   const box = dark ? "bg-ink-box" : "bg-paper-box";
   const inv = dark ? "bg-paper-box text-ink" : "bg-ink-box text-paper";
-  // accents
   const accent = dark ? "bg-moss text-ink" : "bg-forest text-paper";
   const alt = dark ? "bg-forest text-paper" : "bg-moss text-ink";
   const accentText = dark ? "text-moss" : "text-forest";
@@ -140,7 +147,6 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
   const knob = dark ? "bg-ink" : "bg-paper";
   const knobText = dark ? "text-ink" : "text-paper";
   const ring = dark ? "focus:ring-moss" : "focus:ring-forest";
-  // accents inside the inverted box (which is the opposite mode)
   const invAccent = dark ? "bg-forest text-paper" : "bg-moss text-ink";
   const invAccentBg = dark ? "bg-forest" : "bg-moss";
 
@@ -211,7 +217,7 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
                 >
                   <span
                     className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
-                      on ? `left-[22px] ${knob}` : `left-0.5 ${accentBg}`
+                      on ? `left-[22px] ${knob}` : `left-0.5 ${accentBg}`}
                     }`}
                   />
                 </button>
@@ -360,14 +366,39 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
   );
 }
 
-/* ---------------- Page ---------------- */
+/* ---------------- Version Layout ---------------- */
 
-export default function App() {
+function VersionLayout({ version, children }: { version: "v1" | "v2"; children: ReactNode }) {
   return (
-    <div className="bg-paper text-ink">
-      {/* Spec */}
+    <div data-version={version} className="bg-paper text-ink min-h-screen">
+      {children}
+    </div>
+  );
+}
+
+/* ---------------- Spec Page ---------------- */
+
+function SpecPage({ version }: { version: "v1" | "v2" }) {
+  const colors = version === "v1" ? v1Colors : v2Colors;
+  const splashes = version === "v1" ? v1Splashes : v2Splashes;
+  const versionLabel = version === "v1" ? "v1 (Original)" : "v2 (Current)";
+
+  return (
+    <VersionLayout version={version}>
       <header className="mx-auto max-w-6xl px-6 pb-20 pt-16 sm:px-10">
-        <h1 className="serif text-5xl sm:text-6xl">Palette &amp; type</h1>
+        <div className="mb-8 flex items-center justify-between">
+          <h1 className="serif text-5xl sm:text-6xl">Palette & type</h1>
+          <nav className="flex gap-4">
+            <NavLink to="/v1" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
+              v1
+            </NavLink>
+            <NavLink to="/v2" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
+              v2
+            </NavLink>
+          </nav>
+        </div>
+
+        <p className="mb-8 text-sm opacity-50">Viewing: {versionLabel}</p>
 
         <div className="mt-14">
           <Label>Colours</Label>
@@ -422,6 +453,50 @@ export default function App() {
 
       <Preview mode="light" />
       <Preview mode="dark" />
+    </VersionLayout>
+  );
+}
+
+/* ---------------- Landing Page ---------------- */
+
+function LandingPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Auto-redirect to v2 on root
+  if (location.pathname === "/") {
+    navigate("/v2", { replace: true });
+    return null;
+  }
+
+  return (
+    <div className="bg-paper text-ink min-h-screen flex items-center justify-center px-4">
+      <div className="text-center max-w-md">
+        <h1 className="serif text-5xl sm:text-6xl mb-4">Colour Palette Test Site</h1>
+        <p className="mb-8 opacity-60">Select a version to view the design system</p>
+        <div className="flex flex-col gap-4">
+          <NavLink to="/v2" className="bg-forest text-paper px-8 py-4 rounded-full font-medium transition hover:opacity-90">
+            v2 — Current (muted greens, warm paper)
+          </NavLink>
+          <NavLink to="/v1" className="bg-paper-box text-ink px-8 py-4 rounded-full font-medium transition hover:opacity-70 border border-ink/10">
+            v1 — Original (bright greens, pure white)
+          </NavLink>
+        </div>
+      </div>
     </div>
+  );
+}
+
+/* ---------------- App ---------------- */
+
+export default function App() {
+  return (
+    <BrowserRouter basename="/">
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/v1" element={<SpecPage version="v1" />} />
+        <Route path="/v2" element={<SpecPage version="v2" />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

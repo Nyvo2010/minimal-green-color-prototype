@@ -1,0 +1,18 @@
+/* v1 Theme - Original Palette */
+:root[data-version="v1"] {
+  --color-ink: #121213;
+  --color-ink-box: #1f1f21;
+  --color-paper: #ffffff;
+  --color-paper-box: #f2f2f3;
+  --color-forest: #2c5f2d;
+  --color-moss: #97bc62;
+
+  --grad-base: #2c5f2d;
+  --grad-main-dark: #2c5f2d;
+  --grad-main-light: #97bc62;
+  --grad-accent-green: #97bc62;
+  --grad-accent-pink: #f4a9c4;
+  --grad-accent-cyan: #a5d8f0;
+  --grad-accent-lilac: #bda9f2;
+  --grad-accent-orange: #f6a25e;
+}

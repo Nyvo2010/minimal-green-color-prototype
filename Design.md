@@ -2,8 +2,12 @@
 
 ## Versions
 
-- **v1** — Original: pure white paper, brighter greens (`#2C5F2D` / `#97BC62`), stronger splash colors
+- **v1** — Original: pure white paper (`#FFFFFF`), bright greens (`#2C5F2D` / `#97BC62`), stronger splash colors
 - **v2** — Current: warm beige paper (`#FAF9F6` / `#F0EFE9`), new green palette with 2 main colors + 3 accents in equal proportion
+
+Both versions are accessible as routes in the same SPA:
+- `/v1` — Original version
+- `/v2` — Current version (default)
 
 ---
 
@@ -208,3 +212,19 @@ Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mo
   --color-moss: #68ad90;
 }
 ```
+
+## Local Development
+
+```bash
+npm run dev
+# Opens at http://localhost:5173/
+# - /v1 shows original version
+# - /v2 shows current version (default)
+```
+
+## GitHub Pages Deployment
+
+The site is deployed to `https://nyvo2010.github.io/minimal-green-color-prototype/` with routes:
+- `/` → redirects to `/v2`
+- `/v1` → original version
+- `/v2` → current version
