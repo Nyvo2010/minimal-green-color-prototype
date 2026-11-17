@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect - captures the path and redirects to root with it preserved
+    var path = window.location.pathname;
+    var search = window.location.search;
+    var hash = window.location.hash;
+    
+    // For project pages (not user pages), the path includes the repo name
+    // e.g., /minimal-green-color-prototype/v1 -> we want to preserve /v1
+    var basePath = '/minimal-green-color-prototype';
+    
+    // If we're at the root 404, don't redirect
+    if (path === basePath + '/404.html' || path === basePath + '/') {
+      // Redirect to index with base path
+      window.location.replace(basePath + '/');
+    } else {
+      // Preserve the path but go through index.html
+      // Extract path after the base path
+      var cleanPath = path.replace(basePath, '');
+      if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+      
+      // Redirect to root with the path in hash (or search param)
+      window.location.replace(basePath + '/?redirect=' + encodeURIComponent(cleanPath + search + hash));
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting to <a id="link" href="#">home</a>...</p>
+  <script>
+    // Fallback if JS doesn't run
+    var basePath = '/minimal-green-color-prototype';
+    document.getElementById('link').href = basePath + '/';
+  </script>
+</body>
+</html>

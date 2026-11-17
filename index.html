@@ -10,6 +10,19 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // Handle GitHub Pages SPA redirect from 404.html
+      // Check for redirect parameter before React Router initializes
+      (function() {
+        var redirectParam = new URLSearchParams(window.location.search).get('redirect');
+        if (redirectParam) {
+          // Replace the URL with the clean path (no redirect param)
+          // Use replaceState to avoid adding to history
+          var cleanUrl = window.location.pathname + redirectParam;
+          window.history.replaceState(null, '', cleanUrl);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
