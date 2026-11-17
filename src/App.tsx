@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation, NavLink } from "react-router-dom";
 
 /* ---------------- Spec data ---------------- */
@@ -369,11 +369,11 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
 /* ---------------- Version Layout ---------------- */
 
 function VersionLayout({ version, children }: { version: "v1" | "v2"; children: ReactNode }) {
-  return (
-    <div data-version={version} className="bg-paper text-ink min-h-screen">
-      {children}
-    </div>
-  );
+  useEffect(() => {
+    document.documentElement.setAttribute("data-version", version);
+  }, [version]);
+
+  return <div className="bg-paper text-ink min-h-screen">{children}</div>;
 }
 
 /* ---------------- Spec Page ---------------- */
@@ -463,8 +463,8 @@ function LandingPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Auto-redirect to v2 on root
-  if (location.pathname === "/") {
+  // Auto-redirect to v2 on root (handle both with and without basename)
+  if (location.pathname === "/" || location.pathname === "") {
     navigate("/v2", { replace: true });
     return null;
   }
@@ -489,13 +489,16 @@ function LandingPage() {
 
 /* ---------------- App ---------------- */
 
+const BASENAME = import.meta.env.BASE_URL || "/";
+
 export default function App() {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename={BASENAME}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/v1" element={<SpecPage version="v1" />} />
         <Route path="/v2" element={<SpecPage version="v2" />} />
+        <Route path="*" element={<div className="bg-paper text-ink min-h-screen flex items-center justify-center"><h1 className="serif text-4xl">404 - Not Found</h1></div>} />
       </Routes>
     </BrowserRouter>
   );
