@@ -1,194 +1,193 @@
-# Design notes — exact values from implementation
+# Design System
 
-## Colours (Tailwind @theme)
+## Versions
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `--color-ink` | `#121213` | Dark page background; inverted box on light |
-| `--color-ink-box` | `#1F1F21` | Boxes on dark |
-| `--color-paper` | `#FFFFFF` | Light page background |
-| `--color-paper-box` | `#F2F2F3` | Boxes on light; also box on dark |
-| `--color-forest` | `#2C5F2D` | Dark green accent (buttons, rings on light) |
-| `--color-moss` | `#97BC62` | Light green accent (buttons, rings on dark) |
+- **v1** — Original: pure white paper, brighter greens, stronger splash colors
+- **v2** — Current: warm beige paper (`#FAF9F6` / `#F0EFE9`), muted gradient with more pink/cyan, less green dominance
 
-Pastels (gradient only, not main colors):
-- Pink: `rgba(244, 169, 196, 0.95)` → `#F4A9C4`
-- Orange: `rgba(246, 162, 94, 0.95)` → `#F6A25E`
-- Lilac: `rgba(189, 169, 242, 0.85)` → `#BDA9F2`
-- Sky: `rgba(165, 216, 240, 0.85)` → `#A5D8F0`
+---
 
-## Type
+## v2 Colour (Current)
 
-| Role | Font | Size | Weight | Tracking | Other |
-|------|------|------|--------|----------|-------|
-| Display serif | Newsreader (var, `opsz` 96) | 48px / 60px (`text-5xl`/`sm:text-6xl`) | 430 | `-0.02em` | `.serif` class |
-| Section title | Newsreader | 48px / 60px | 430 | `-0.02em` | `.serif` |
-| Page title | Newsreader | 48px / 60px | 430 | `-0.02em` | `.serif` |
-| Specimen large | Newsreader | 60px (`text-6xl`) | 430 | `-0.02em` | `.serif` |
-| Stat number | Newsreader | 72px (`text-7xl`) | 430 | `-0.02em` | `.serif leading-none` |
-| Quote / statement | Newsreader | 30px (`text-3xl`) | 430 | `-0.02em` | `.serif leading-tight` |
-| Chip value (nested box) | Newsreader | 24px (`text-2xl`) | 430 | `-0.02em` | `.serif leading-none` |
-| UI font | Inter | — | 400 / 500 | — | `--font-sans` |
-| Body copy | Inter | 14px (`text-sm`) | 400/500 | — | |
-| Small copy | Inter | 12px (`text-xs`) | 400/500 | — | |
-| Labels | Inter | 12px (`text-xs`) | 500 | `0.14em` | uppercase, `opacity-50` |
-| Dimension marks | mono (font-mono) | 9px (`text-[9px]`) | — | `0.08em` | uppercase, `text-forest/70` |
+| Token | Hex | Role |
+|---|---|---|
+| `ink` | `#121213` | Dark page background; also a box on white |
+| `ink-box` | `#1F1F21` | Boxes on ink |
+| `paper` | `#FAF9F6` | Light page background (warm beige) |
+| `paper-box` | `#F0EFE9` | Boxes on light; also a box on ink |
+| `forest` | `#2C5F2D` | Green, dark |
+| `moss` | `#97BC62` | Green, light |
 
-## Spacing
+Splash colours — gradients only, never fills or text:
 
-| Context | Value | Tailwind |
-|---------|-------|----------|
-| Page horizontal gutter | 24px / 40px from `sm` | `px-6 sm:px-10` |
-| Content max-width | 1152px | `max-w-6xl` |
-| Page header top | 64px | `pt-16` |
-| Page header bottom | 80px | `pb-20` |
-| Spec block gap | 48px | `mt-12` / `mt-14` |
-| Colour row gap | 12px | `gap-3` |
-| Colour chip height | 176px | `h-44` |
-| Colour chip padding | 16px | `p-4` |
-| Type panel padding | 28px | `p-7` |
-| Gradient swatch height | 144px | `h-36` |
-| Bento container padding | 24px / 32px from `sm` | `p-6 sm:p-8` |
-| Bento gutter | 16px | grid `1rem` column |
-| Outer card padding | 28px | `p-7` |
-| Outer card padding inset (dashed) | 28px | `inset-7` |
-| Nested box padding | 12px | `p-3` |
-| Nested box padding inset (dashed) | 12px | `inset-3` |
-| Preview vertical padding | 64px | `py-16` |
-| Preview card padding | 28px | `p-7` |
-| Preview grid gap | 16px | `gap-4` |
-| Button horizontal padding | 24px | `px-6` |
-| Button vertical padding | 12px | `py-3` |
-| Tag horizontal padding | 12px | `px-3` |
-| Tag vertical padding | 6px | `py-1.5` |
-| Input horizontal padding | 16px | `px-4` |
-| Input vertical padding | 14px | `py-3.5` |
-| Toggle track | 44×24px | `h-6 w-11` |
-| Toggle knob | 20×20px | `h-5 w-5` |
-| Checkbox | 24×24px | `h-6 w-6` |
-| Tab horizontal padding | 12px | `px-3` |
-| Tab vertical padding | 8px | `py-2` |
-| Progress track height | 8px | `h-2` |
-| Toast icon circle | 36×36px | `h-9 w-9` |
-| Text card min-height | 256px | `min-h-64` |
-| Accent dot | 8×8px | `h-2 w-2` |
+| Pink | Orange | Lilac | Sky | Cyan |
+|---|---|---|---|---|
+| `#F4A9C4` | `#F6A25E` | `#BDA9F2` | `#A5D8F0` | `#64C8DC` |
+
+Text hierarchy comes from opacity, not extra greys: secondary `60–70%`, labels `50%`, placeholders `40%`.
+
+**Dark mode** — same six colours, roles swap:
+
+| | Light | Dark |
+|---|---|---|
+| Background | `paper` | `ink` |
+| Box | `paper-box` | `ink-box` |
+| Accent | `forest` on `paper` | `moss` on `ink` |
+| Secondary accent | `moss` on `ink` | `forest` on `paper` |
+| Inverted box | `ink-box` | `paper-box` |
+
+---
+
+## v1 Colour (Archived)
+
+| Token | Hex | Role |
+|---|---|---|
+| `ink` | `#121213` | Dark page background; also a box on white |
+| `ink-box` | `#1F1F21` | Boxes on ink |
+| `paper` | `#FFFFFF` | Light page background |
+| `paper-box` | `#F2F2F3` | Boxes on white; also a box on ink |
+| `forest` | `#2C5F2D` | Green, dark |
+| `moss` | `#97BC62` | Green, light |
+
+Splash colours — gradients only, never fills or text:
+
+| Pink | Orange | Lilac | Sky |
+|---|---|---|---|
+| `#F4A9C4` | `#F6A25E` | `#BDA9F2` | `#A5D8F0` |
+
+---
+
+## Typography
+
+- Display: **Newsreader** — `opsz 96`, weight `430`, tracking `-0.02em`; italic for accents.
+- Interface: **Inter** — weights `400` and `500`.
+
+| Use | Size |
+|---|---|
+| Hero / page title | 48px → 60px at `sm` |
+| Section heading | 36–48px, leading-tight |
+| Statement | 30px, leading-tight |
+| Small headline | 24px |
+| Stat number | 72px, leading-none |
+| Body | 14px |
+| Label | 12px, uppercase, tracking `.14em`, opacity 50% |
+| Tag | 12px, weight 500 |
+
+Serif lines often pair a full-opacity phrase with a `50–60%` continuation.
 
 ## Radii
 
-| Element | Radius | Tailwind |
-|---------|--------|----------|
-| Cards, gradient panels, toast | 24px | `rounded-3xl` |
-| Spec panels, colour chips, gradient swatch, floating card | 16px | `rounded-2xl` |
-| Inputs, nested boxes | 12px | `rounded-xl` |
-| Checkbox | 6px | `rounded-md` |
-| Buttons, tags, toggles, tabs, progress | full (9999px) | `rounded-full` |
+| Element | Radius |
+|---|---|
+| Cards, panels | 24px |
+| Inner cards, swatches | 16px |
+| Inputs, list rows, nested boxes | 12px |
+| Checkbox | 6px |
+| Buttons, tags, toggles, tabs | full pill |
 
-## Components — exact classes
+## Spacing
 
-### Buttons (all `rounded-full px-6 py-3 text-sm font-medium transition`)
-| Variant | Light mode | Dark mode | Hover |
-|---------|------------|-----------|-------|
-| Primary | `bg-forest text-paper` | `bg-moss text-ink` | `opacity-90` |
-| Secondary | `bg-moss text-ink` | `bg-forest text-paper` | `opacity-90` |
-| Neutral | `bg-paper text-ink` | `bg-ink text-paper` | `opacity-80` |
-| Inverted | `bg-ink-box text-paper` | `bg-paper-box text-ink` | `opacity-90` |
-| Text link | `text-forest` | `text-moss` | `opacity-70` (no bg) |
+| Context | Value |
+|---|---|
+| Container | 1152px, `24px` padding → `40px` at `sm` |
+| Page top / bottom | 64px / 80px |
+| Section gap | 48–56px |
+| Card padding | 28px; feature panels 24px → 48px at `sm` |
+| Grid gap | 12–16px |
+| Button | 24px × 12px |
+| Tag | 12px × 6px |
+| Input | 16px × 14px |
 
-### Tags (all `rounded-full px-3 py-1.5 text-xs font-medium`)
-| Variant | Light mode | Dark mode |
-|---------|------------|-----------|
-| Live | `bg-forest text-paper` | `bg-moss text-ink` |
-| Approved | `bg-moss text-ink` | `bg-forest text-paper` |
-| Draft | `bg-paper text-ink` | `bg-ink text-paper` |
-| Archived | `bg-ink-box text-paper` | `bg-paper-box text-ink` |
+## Components
 
-### Inputs
-- `rounded-xl` (12px)
-- `px-4 py-3.5` (16/14 padding)
-- `text-sm` (14px)
-- `placeholder:opacity-40`
-- `outline-none`
-- `focus:ring-2` — `focus:ring-forest` (light) / `focus:ring-moss` (dark)
-- Background: surface colour (`bg-paper` light / `bg-ink` dark)
+- **Buttons** — pill, 14px / weight 500, `transition`, hover `opacity 90%` (text link `70%`). Four fills: accent, secondary accent, surface, inverted.
+- **Tags** — same four fills, 12px.
+- **Inputs** — surface-coloured, 12px radius, no border, focus `2px` accent ring.
+- **Toggle** — 44 × 24px track, 20px knob.
+- **Checkbox** — 24px, accent fill with check.
+- **Tabs** — pill track, accent pill for the active segment.
+- **Progress** — 8px pill track, accent fill, 500ms transition.
+- **Shadow** — only on cards floating over a gradient:
+  `0 30px 60px -20px rgba(18,18,19,.4), 0 8px 20px -8px rgba(18,18,19,.15)`
 
-### Toggle
-- Track: `h-6 w-11 rounded-full`
-- Off: surface colour; On: accent background (`bg-forest` light / `bg-moss` dark)
-- Knob: `h-5 w-5 rounded-full`, `top-0.5`
-- Off position: `left-0.5` with accent background
-- On position: `left-[22px]` with surface colour
-- Transition: `transition-all`
+## v2 Gradient
 
-### Checkbox
-- Box: `h-6 w-6 rounded-md`
-- Off: surface colour; On: accent background
-- Check icon: 16×16 (`h-4 w-4`), stroke-width 3, `knobText` colour
+Muted green base with more pink/cyan/sky, less green dominance.
 
-### Tabs
-- Container: surface background, `rounded-full p-1 gap-1`
-- Button: `flex-1 rounded-full px-3 py-2 text-sm transition`
-- Active: accent background
-- Inactive: `opacity-60 hover:opacity-100`
+```
+base: #2A5A2A; inset: -10%; filter: blur(10px) contrast(1.12)
 
-### Progress
-- Track: surface background, `h-2 rounded-full`
-- Fill: accent background (`bg-forest` light / `bg-moss` dark)
-- Width transition: `transition-all duration-500`
-- Day: 40% (`w-2/5`); Week: 75% (`w-3/4`)
+radial-gradient(12% 15% at 70% 10%, rgba(244,169,196,.75), transparent 100%)
+radial-gradient(10% 12% at 88% 25%, rgba(100,200,220,.7), transparent 100%)
+radial-gradient(14% 18% at 82% 15%, rgba(189,169,242,.6), transparent 100%)
+radial-gradient(10% 12% at 15% 85%, rgba(165,216,240,.75), transparent 100%)
+linear-gradient(115deg, transparent 28%, rgba(151,188,98,.35) 42%, transparent 58%)
+radial-gradient(35% 42% at 18% 16%, rgba(151,188,98,.7), transparent 70%)
+radial-gradient(30% 35% at 62% 40%, rgba(151,188,98,.25), transparent 70%)
+radial-gradient(45% 50% at 88% 94%, rgba(18,18,19,.8), transparent 72%)
+radial-gradient(40% 40% at 6% 96%, rgba(18,18,19,.6), transparent 72%)
+```
 
-### Stat cards
-- Padding: `p-7` (28px)
-- Radius: `rounded-3xl` (24px)
-- Label: `text-sm opacity-60`
-- Value: `.serif mt-8 text-7xl leading-none` (72px)
-- Surfaces: inverted / `bg-forest text-paper` / `bg-moss text-ink`
+Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.55`.
 
-### Gradient panel (`.grad`)
-- Base: `#2C5F2D`
-- Blobs: 7 radial gradients + 1 diagonal linear (moss highlight)
-- Blur: `blur(10px) contrast(1.12)` on `::before` (inset -10%)
-- Grain: two SVG turbulence layers (260px @ 0.9 baseFreq, 520px @ 0.35), `mix-blend-mode: overlay`, opacity 0.55
-- Single recipe used everywhere
+## v1 Gradient (Archived)
 
-### Floating card on gradient
-- Card: `rounded-2xl p-6` (16px radius, 24px padding)
-- Shadow (`.soft-shadow`): `0 30px 60px -20px rgba(18,18,19,.4), 0 8px 20px -8px rgba(18,18,19,.15)`
+Green base with moss light, ink depth and small warm flecks.
 
-### Toast / inverted box
-- Box: `rounded-3xl p-7` (24px radius, 28px padding)
-- Icon circle: `h-9 w-9 rounded-full` (36px), accent background
-- Buttons: `flex-1 rounded-full py-3 text-sm font-medium transition`
-  - Confirm: accent background, hover `opacity-90`
-  - Cancel: surface background, hover `opacity-80`
+```
+base: #2C5F2D; inset: -10%; filter: blur(10px) contrast(1.12)
 
-### Text cards
-- `min-h-64` (256px), `rounded-3xl p-7` (24px radius, 28px padding)
-- Statement: `.serif text-3xl leading-tight` (30px)
-- Accent dot: `h-2 w-2 rounded-full` (8px), accent background
+radial-gradient( 9% 12% at 74%  9%, rgba(189,169,242,.85), transparent 100%)
+radial-gradient(10% 14% at 92% 27%, rgba(246,162, 94,.95), transparent 100%)
+radial-gradient(15% 20% at 84% 17%, rgba(244,169,196,.95), transparent 100%)
+linear-gradient(115deg, transparent 28%, rgba(151,188,98,.5) 42%, transparent 58%)
+radial-gradient(38% 45% at 16% 14%, rgba(151,188,98,.95), transparent 70%)
+radial-gradient(34% 40% at 60% 38%, rgba(151,188,98,.35), transparent 70%)
+radial-gradient(45% 50% at 88% 94%, rgba( 18, 18, 19,.9), transparent 72%)
+radial-gradient(40% 40% at  6% 96%, rgba( 18, 18, 19,.7), transparent 72%)
+```
 
-## Motion / interaction
+Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.55`.
 
-| Element | Behaviour |
-|---------|-----------|
-| Buttons, tags, tabs, toast buttons | Hover: `opacity-80`–`opacity-90`; no transform, no shadow |
-| Toggle knob | `transition-all` (position + background) |
-| Progress fill | `transition-all duration-500` (width) |
-| Checkbox | Background transition only |
-| Page | `scroll-behavior: smooth` on `html` |
-| No entrance, scroll, or layout animations | |
+## Tokens (v2)
 
-## Surface pairs (mode-dependent)
+```css
+:root {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
 
-| Context | Light | Dark |
-|---------|-------|------|
-| Page background | `paper` / `ink` | `ink` / `paper` |
-| Standard box | `paper-box` | `ink-box` |
-| Inverted box | `ink-box` / `paper` | `paper-box` / `ink` |
-| Primary accent | `forest` / `paper` | `moss` / `ink` |
-| Secondary accent | `moss` / `ink` | `forest` / `paper` |
-| Text link | `text-forest` | `text-moss` |
-| Focus ring | `focus:ring-forest` | `focus:ring-moss` |
-| Toggle track (off) | surface | surface |
-| Toggle track (on) | `forest` | `moss` |
-| Toggle knob (off) | `forest` | `moss` |
-| Toggle knob (on) | surface | surface |
+  --color-ink: #121213;
+  --color-ink-box: #1f1f21;
+  --color-paper: #faf9f6;
+  --color-paper-box: #f0efe9;
+  --color-forest: #2c5f2d;
+  --color-moss: #97bc62;
+
+  --radius-card: 24px;
+  --radius-inner: 16px;
+  --radius-control: 12px;
+  --radius-checkbox: 6px;
+
+  --container: 1152px;
+  --gutter: 24px;
+  --card-padding: 28px;
+  --grid-gap: 16px;
+  --section-gap: 48px;
+
+  --shadow-float: 0 30px 60px -20px rgba(18, 18, 19, 0.4),
+                  0 8px 20px -8px rgba(18, 18, 19, 0.15);
+}
+```
+
+```css
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --color-ink: #121213;
+  --color-ink-box: #1f1f21;
+  --color-paper: #faf9f6;
+  --color-paper-box: #f0efe9;
+  --color-forest: #2c5f2d;
+  --color-moss: #97bc62;
+}
+```

@@ -5,8 +5,8 @@ import { useState, type ReactNode } from "react";
 const colors = [
   { name: "Ink", role: "Dark bg · or box on white", hex: "#121213", cls: "bg-ink text-paper" },
   { name: "Ink box", role: "Box on light", hex: "#1F1F21", cls: "bg-ink-box text-paper" },
-  { name: "White", role: "Light bg", hex: "#FFFFFF", cls: "bg-paper text-ink ring-1 ring-ink/10" },
-  { name: "Paper box", role: "Box on light · or on dark", hex: "#F2F2F3", cls: "bg-paper-box text-ink" },
+  { name: "Paper", role: "Light bg (warm)", hex: "#FAF9F6", cls: "bg-paper text-ink ring-1 ring-ink/10" },
+  { name: "Paper box", role: "Box on light · or on dark", hex: "#F0EFE9", cls: "bg-paper-box text-ink" },
   { name: "Forest", role: "Green, dark", hex: "#2C5F2D", cls: "bg-forest text-paper" },
   { name: "Moss", role: "Green, light", hex: "#97BC62", cls: "bg-moss text-ink" },
 ];
@@ -16,6 +16,7 @@ const splashes = [
   { name: "Orange", hex: "#F6A25E" },
   { name: "Lilac", hex: "#BDA9F2" },
   { name: "Sky", hex: "#A5D8F0" },
+  { name: "Cyan", hex: "#64C8DC" },
 ];
 
 /* ---------------- Helpers ---------------- */

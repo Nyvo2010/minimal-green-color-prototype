@@ -7,12 +7,12 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
 
-  --color-ink: #121213;       /* dark background  (also a box on white) */
-  --color-ink-box: #1f1f21;   /* boxes on dark */
-  --color-paper: #ffffff;     /* light background */
-  --color-paper-box: #f2f2f3; /* boxes on light   (also a box on dark) */
-  --color-forest: #2c5f2d;    /* green, dark */
-  --color-moss: #97bc62;      /* green, light */
+  --color-ink: #121213;
+  --color-ink-box: #1f1f21;
+  --color-paper: #faf9f6;
+  --color-paper-box: #f0efe9;
+  --color-forest: #2c5f2d;
+  --color-moss: #97bc62;
 }
 
 html {
@@ -34,7 +34,7 @@ body {
 }
 
 /* ---------- Grainy gradients ----------
-   Green + white dominate. Small splashes of pink / orange / lilac / sky only. */
+   Green base with moss light, ink depth. Muted pink/cyan/sky accents. */
 
 .grad {
   position: relative;
@@ -67,27 +67,24 @@ body {
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='3' seed='9' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='2' intercept='-0.5'/><feFuncG type='linear' slope='2' intercept='-0.5'/><feFuncB type='linear' slope='2' intercept='-0.5'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* Splash colours (gradients only) */
+/* Splash colours (gradients only) - muted, more pink/cyan */
 .grad {
-  --pink: rgba(244, 169, 196, 0.95);
-  --orange: rgba(246, 162, 94, 0.95);
-  --lilac: rgba(189, 169, 242, 0.85);
-  --sky: rgba(165, 216, 240, 0.85);
-}
-
-/* The gradient. Green base, moss light, ink depth and small warm flecks.
-   Same recipe on every surface. */
-.grad {
-  --base: #2c5f2d;
+  --pink: rgba(244, 169, 196, 0.75);
+  --orange: rgba(246, 162, 94, 0.5);
+  --lilac: rgba(189, 169, 242, 0.6);
+  --sky: rgba(165, 216, 240, 0.75);
+  --cyan: rgba(100, 200, 220, 0.7);
+  --base: #2a5a2a;
   --blobs:
-    radial-gradient(9% 12% at 74% 9%, var(--lilac) 0%, transparent 100%),
-    radial-gradient(10% 14% at 92% 27%, var(--orange) 0%, transparent 100%),
-    radial-gradient(15% 20% at 84% 17%, var(--pink) 0%, transparent 100%),
-    linear-gradient(115deg, transparent 28%, rgba(151, 188, 98, 0.5) 42%, transparent 58%),
-    radial-gradient(38% 45% at 16% 14%, rgba(151, 188, 98, 0.95) 0%, transparent 70%),
-    radial-gradient(34% 40% at 60% 38%, rgba(151, 188, 98, 0.35) 0%, transparent 70%),
-    radial-gradient(45% 50% at 88% 94%, rgba(18, 18, 19, 0.9) 0%, transparent 72%),
-    radial-gradient(40% 40% at 6% 96%, rgba(18, 18, 19, 0.7) 0%, transparent 72%);
+    radial-gradient(12% 15% at 70% 10%, var(--pink) 0%, transparent 100%),
+    radial-gradient(10% 12% at 88% 25%, var(--cyan) 0%, transparent 100%),
+    radial-gradient(14% 18% at 82% 15%, var(--lilac) 0%, transparent 100%),
+    radial-gradient(10% 12% at 15% 85%, var(--sky) 0%, transparent 100%),
+    linear-gradient(115deg, transparent 28%, rgba(151, 188, 98, 0.35) 42%, transparent 58%),
+    radial-gradient(35% 42% at 18% 16%, rgba(151, 188, 98, 0.7) 0%, transparent 70%),
+    radial-gradient(30% 35% at 62% 40%, rgba(151, 188, 98, 0.25) 0%, transparent 70%),
+    radial-gradient(45% 50% at 88% 94%, rgba(18, 18, 19, 0.8) 0%, transparent 72%),
+    radial-gradient(40% 40% at 6% 96%, rgba(18, 18, 19, 0.6) 0%, transparent 72%);
 }
 
 .soft-shadow {
