@@ -67,7 +67,7 @@ body {
   inset: -15%;
   z-index: 0;
   background: var(--grad-blobs);
-  filter: blur(12px) contrast(1.2);
+  filter: blur(2px) contrast(1.2);
 }
 
 .grad::after {
@@ -76,227 +76,170 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: var(--grain, 0.55);
+  opacity: var(--grain, 0.35);
   mix-blend-mode: overlay;
   background-image:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='2.6' intercept='-0.8'/><feFuncG type='linear' slope='2.6' intercept='-0.8'/><feFuncB type='linear' slope='2.6' intercept='-0.8'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='3' seed='9' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='2' intercept='-0.5'/><feFuncG type='linear' slope='2' intercept='-0.5'/><feFuncB type='linear' slope='2' intercept='-0.5'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* v1 Gradient Blobs - ORIGINAL exact color proportions with abstract shapes */
+/* v1 Gradient Blobs — 85% greens (forest #2c5f2d + moss #97bc62), tiny accent flecks */
 :root[data-version="v1"] {
   --grad-blobs:
-    /* Main light - sweeping diagonal (original: 115deg, transparent 28%, moss 42%, transparent 58% at 0.5 opacity) */
+    /* ===== BASE: Forest green foundation ===== */
+    radial-gradient(ellipse 65% 60% at 20% 30%,
+      #2c5f2d 0%,
+      #2c5f2d 35%,
+      transparent 75%),
+    radial-gradient(ellipse 55% 50% at 80% 70%,
+      #2c5f2d 0%,
+      #2c5f2d 30%,
+      transparent 70%),
+    
+    /* ===== MAIN GREEN: Moss - sweeping diagonal (dominant) ===== */
     linear-gradient(115deg,
-      transparent 28%,
-      color-mix(in srgb, var(--grad-main-light) 50%, transparent) 42%,
-      transparent 58%),
-    /* Main light - LARGE organic mass top-left (original: 38% 45% at 16% 14%, 0.95 opacity) */
-    radial-gradient(ellipse 38% 45% at 16% 14%,
-      color-mix(in srgb, var(--grad-main-light) 95%, transparent) 0%,
-      color-mix(in srgb, var(--grad-main-light) 95%, transparent) 40%,
+      transparent 25%,
+      #97bc62 40%,
+      #97bc62 55%,
       transparent 70%),
-    /* Main light - medium organic mass mid-right (original: 34% 40% at 60% 38%, 0.35 opacity) */
-    radial-gradient(ellipse 34% 40% at 60% 38%,
-      color-mix(in srgb, var(--grad-main-light) 35%, transparent) 0%,
-      color-mix(in srgb, var(--grad-main-light) 35%, transparent) 20%,
-      transparent 70%),
-    /* Accent lilac - TINY fleck top-right (original: 9% 12% at 74% 9%, 0.85 opacity) */
-    radial-gradient(ellipse 9% 12% at 74% 9%,
-      color-mix(in srgb, var(--grad-accent-lilac) 85%, transparent) 0%,
-      color-mix(in srgb, var(--grad-accent-lilac) 85%, transparent) 30%,
-      transparent 65%),
-    /* Accent orange - TINY fleck top-right (original: 10% 14% at 92% 27%, 0.95 opacity) */
-    radial-gradient(ellipse 10% 14% at 92% 27%,
-      color-mix(in srgb, var(--grad-accent-orange) 95%, transparent) 0%,
-      color-mix(in srgb, var(--grad-accent-orange) 95%, transparent) 30%,
-      transparent 65%),
-    /* Accent pink - TINY fleck top-right (original: 15% 20% at 84% 17%, 0.95 opacity) */
-    radial-gradient(ellipse 15% 20% at 84% 17%,
-      color-mix(in srgb, var(--grad-accent-pink) 95%, transparent) 0%,
-      color-mix(in srgb, var(--grad-accent-pink) 95%, transparent) 35%,
-      transparent 70%),
-    /* Ink depth - bottom right anchor (original: 45% 50% at 88% 94%, 0.9 opacity) */
-    radial-gradient(ellipse 45% 50% at 88% 94%,
-      rgba(18, 18, 19, 0.9) 0%,
-      rgba(18, 18, 19, 0.5) 40%,
+    radial-gradient(ellipse 42% 48% at 18% 16%,
+      #97bc62 0%,
+      #97bc62 45%,
       transparent 72%),
-    /* Ink depth - bottom left anchor (original: 40% 40% at 6% 96%, 0.7 opacity) */
-    radial-gradient(ellipse 40% 40% at 6% 96%,
-      rgba(18, 18, 19, 0.7) 0%,
-      rgba(18, 18, 19, 0.35) 45%,
-      transparent 72%);
+    radial-gradient(ellipse 36% 42% at 58% 40%,
+      #97bc62 0%,
+      #97bc62 35%,
+      transparent 68%),
+    radial-gradient(ellipse 28% 32% at 72% 65%,
+      #97bc62 0%,
+      #97bc62 30%,
+      transparent 65%),
+    
+    /* ===== ACCENT FLECKS: Tiny, top-right only ===== */
+    radial-gradient(ellipse 8% 10% at 76% 10%,
+      #bda9f2 0%,
+      #bda9f2 25%,
+      transparent 60%),
+    radial-gradient(ellipse 9% 11% at 90% 25%,
+      #f6a25e 0%,
+      #f6a25e 25%,
+      transparent 60%),
+    radial-gradient(ellipse 12% 14% at 84% 18%,
+      #f4a9c4 0%,
+      #f4a9c4 30%,
+      transparent 65%),
+    
+    /* ===== INK ANCHORS: Deep corners ===== */
+    radial-gradient(ellipse 48% 52% at 92% 94%,
+      rgba(18,18,19,0.9) 0%,
+      rgba(18,18,19,0.5) 35%,
+      transparent 70%),
+    radial-gradient(ellipse 42% 42% at 8% 94%,
+      rgba(18,18,19,0.7) 0%,
+      rgba(18,18,19,0.35) 40%,
+      transparent 70%);
 }
 
-/* v2 Gradient Blobs - Consistent quadrant system with prominent accents (40-50% accent area) */
+/* v2 Gradient Blobs — 70% two greens, 30% accents — smooth v1-style */
 :root[data-version="v2"] {
   --grad-blobs:
-    /* ===== TOP-LEFT QUADRANT: Main dark anchor (structure) ===== */
-    /* Large angular mass anchoring top-left */
-    linear-gradient(135deg,
-      transparent 0%,
-      var(--grad-main-dark) 15%,
-      var(--grad-main-dark) 38%,
-      transparent 55%),
-    radial-gradient(ellipse 42% 38% at 8% 12%,
-      color-mix(in srgb, var(--grad-main-dark) 80%, transparent) 0%,
-      color-mix(in srgb, var(--grad-main-dark) 65%, transparent) 35%,
-      transparent 70%),
-    /* Secondary dark ellipse mid-left for depth */
-    radial-gradient(ellipse 28% 35% at 15% 55%,
-      color-mix(in srgb, var(--grad-main-dark) 55%, transparent) 0%,
-      transparent 65%),
-
-    /* ===== BOTTOM-RIGHT QUADRANT: Main dark anchor (structure) ===== */
-    /* Large angular mass anchoring bottom-right */
-    linear-gradient(315deg,
-      transparent 0%,
-      var(--grad-main-dark) 18%,
-      var(--grad-main-dark) 42%,
-      transparent 60%),
-    radial-gradient(ellipse 45% 40% at 92% 88%,
-      color-mix(in srgb, var(--grad-main-dark) 75%, transparent) 0%,
-      color-mix(in srgb, var(--grad-main-dark) 55%, transparent) 35%,
-      transparent 68%),
-    /* Secondary dark ellipse mid-right for depth */
-    radial-gradient(ellipse 30% 28% at 85% 45%,
-      color-mix(in srgb, var(--grad-main-dark) 50%, transparent) 0%,
-      transparent 62%),
-
-    /* ===== DIAGONAL CONNECTOR: Main light sweeping across ===== */
-    /* Primary diagonal sweep - main light spine */
-    linear-gradient(42deg,
-      transparent 5%,
-      color-mix(in srgb, var(--grad-main-light) 70%, transparent) 22%,
-      color-mix(in srgb, var(--grad-main-light) 85%, transparent) 45%,
-      color-mix(in srgb, var(--grad-main-light) 70%, transparent) 68%,
-      transparent 85%),
-    /* Secondary light sweep - crossing accent zones */
-    linear-gradient(58deg,
-      transparent 12%,
-      color-mix(in srgb, var(--grad-main-light) 45%, transparent) 35%,
-      color-mix(in srgb, var(--grad-main-light) 60%, transparent) 55%,
+    /* ===== BASE: Forest — deep anchors (v1 style) ===== */
+    radial-gradient(ellipse 60% 55% at 15% 25%,
+      #2d775b 0%,
+      #2d775b 35%,
       transparent 75%),
-    /* Light ellipses along diagonal as stepping stones */
-    radial-gradient(ellipse 24% 18% at 35% 25%,
-      color-mix(in srgb, var(--grad-main-light) 65%, transparent) 0%,
-      transparent 62%),
-    radial-gradient(ellipse 20% 22% at 65% 65%,
-      color-mix(in srgb, var(--grad-main-light) 60%, transparent) 0%,
-      transparent 65%),
-
-    /* ===== TOP-RIGHT ZONE: Accent PINK - Large conic burst + elliptical mass ===== */
-    /* Primary pink conic burst - dominant top-right */
-    conic-gradient(from 145deg at 84% 16%,
-      transparent 0deg,
-      color-mix(in srgb, var(--grad-accent-pink) 80%, transparent) 30deg,
-      color-mix(in srgb, var(--grad-accent-pink) 95%, transparent) 85deg,
-      color-mix(in srgb, var(--grad-accent-pink) 95%, transparent) 155deg,
-      color-mix(in srgb, var(--grad-accent-pink) 75%, transparent) 210deg,
-      transparent 260deg),
-    /* Large pink elliptical mass - overlapping conic */
-    radial-gradient(ellipse 38% 32% at 78% 22%,
-      color-mix(in srgb, var(--grad-accent-pink) 75%, transparent) 0%,
-      color-mix(in srgb, var(--grad-accent-pink) 65%, transparent) 35%,
-      transparent 68%),
-    /* Pink extension toward center - diagonal finger */
-    radial-gradient(ellipse 28% 20% at 62% 35%,
-      color-mix(in srgb, var(--grad-accent-pink) 60%, transparent) 0%,
-      transparent 65%),
-    /* Pink angular sweep cutting across top edge */
-    linear-gradient(75deg,
-      transparent 55%,
-      color-mix(in srgb, var(--grad-accent-pink) 65%, transparent) 70%,
-      color-mix(in srgb, var(--grad-accent-pink) 50%, transparent) 85%,
-      transparent 95%),
-
-    /* ===== BOTTOM-LEFT ZONE: Accent CYAN - Large conic burst + angular sweep ===== */
-    /* Primary cyan conic burst - dominant bottom-left */
-    conic-gradient(from -95deg at 14% 82%,
-      transparent 0deg,
-      color-mix(in srgb, var(--grad-accent-cyan) 80%, transparent) 35deg,
-      color-mix(in srgb, var(--grad-accent-cyan) 95%, transparent) 100deg,
-      color-mix(in srgb, var(--grad-accent-cyan) 95%, transparent) 165deg,
-      color-mix(in srgb, var(--grad-accent-cyan) 75%, transparent) 220deg,
-      transparent 270deg),
-    /* Large cyan elliptical mass - overlapping conic */
-    radial-gradient(ellipse 36% 34% at 20% 76%,
-      color-mix(in srgb, var(--grad-accent-cyan) 75%, transparent) 0%,
-      color-mix(in srgb, var(--grad-accent-cyan) 65%, transparent) 35%,
-      transparent 68%),
-    /* Cyan angular sweep - diagonal blade across lower half */
-    linear-gradient(28deg,
-      transparent 30%,
-      color-mix(in srgb, var(--grad-accent-cyan) 70%, transparent) 48%,
-      color-mix(in srgb, var(--grad-accent-cyan) 80%, transparent) 62%,
-      color-mix(in srgb, var(--grad-accent-cyan) 55%, transparent) 78%,
-      transparent 90%),
-    /* Cyan secondary burst - mid-left, feeding into center */
-    conic-gradient(from 25deg at 32% 68%,
-      transparent 0deg,
-      color-mix(in srgb, var(--grad-accent-cyan) 70%, transparent) 40deg,
-      color-mix(in srgb, var(--grad-accent-cyan) 85%, transparent) 95deg,
-      transparent 140deg),
-
-    /* ===== CENTER/MID ZONE: Accent GREEN - Organic ellipses + diagonal sweep ===== */
-    /* Primary green organic mass - center anchor */
-    radial-gradient(ellipse 35% 28% at 50% 48%,
-      color-mix(in srgb, var(--grad-accent-green) 75%, transparent) 0%,
-      color-mix(in srgb, var(--grad-accent-green) 65%, transparent) 38%,
-      transparent 70%),
-    /* Secondary green ellipse - upper center */
-    radial-gradient(ellipse 26% 20% at 44% 35%,
-      color-mix(in srgb, var(--grad-accent-green) 65%, transparent) 0%,
-      transparent 65%),
-    /* Tertiary green ellipse - lower center */
-    radial-gradient(ellipse 24% 18% at 56% 58%,
-      color-mix(in srgb, var(--grad-accent-green) 60%, transparent) 0%,
-      transparent 62%),
-    /* Green diagonal sweep - connecting pink and cyan zones */
-    linear-gradient(155deg,
-      transparent 22%,
-      color-mix(in srgb, var(--grad-accent-green) 65%, transparent) 42%,
-      color-mix(in srgb, var(--grad-accent-green) 80%, transparent) 55%,
-      color-mix(in srgb, var(--grad-accent-green) 55%, transparent) 72%,
-      transparent 88%),
-    /* Green conic accent - center-right, small but intense */
-    conic-gradient(from 180deg at 72% 48%,
-      transparent 0deg,
-      color-mix(in srgb, var(--grad-accent-green) 85%, transparent) 50deg,
-      color-mix(in srgb, var(--grad-accent-green) 70%, transparent) 110deg,
-      transparent 160deg),
-
-    /* ===== TOP EDGE: Multi-color angular accent - all colors meeting ===== */
-    conic-gradient(from 85deg at 50% -8%,
-      transparent 0deg,
-      color-mix(in srgb, var(--grad-main-light) 70%, transparent) 18deg,
-      color-mix(in srgb, var(--grad-accent-cyan) 85%, transparent) 42deg,
-      color-mix(in srgb, var(--grad-accent-pink) 90%, transparent) 68deg,
-      color-mix(in srgb, var(--grad-accent-green) 85%, transparent) 92deg,
-      color-mix(in srgb, var(--grad-main-dark) 60%, transparent) 115deg,
-      transparent 145deg),
-
-    /* ===== CORNER INK DEPTH ANCHORS ===== */
-    /* Bottom-right deep ink */
-    radial-gradient(ellipse 58% 50% at 98% 98%,
-      rgba(18, 18, 19, 0.95) 0%,
-      rgba(18, 18, 19, 0.75) 32%,
-      transparent 68%),
-    /* Bottom-left deep ink */
-    radial-gradient(ellipse 50% 45% at 2% 98%,
-      rgba(18, 18, 19, 0.9) 0%,
-      rgba(18, 18, 19, 0.6) 38%,
+    radial-gradient(ellipse 55% 50% at 85% 75%,
+      #2d775b 0%,
+      #2d775b 30%,
       transparent 72%),
-    /* Top-right subtle ink */
-    radial-gradient(ellipse 35% 28% at 96% 4%,
-      rgba(18, 18, 19, 0.55) 0%,
+    
+    /* ===== MAIN GREEN: Moss — sweeping diagonal + organic masses (v1 style) ===== */
+    linear-gradient(118deg,
+      transparent 25%,
+      #68ad90 42%,
+      #68ad90 58%,
+      transparent 75%),
+    radial-gradient(ellipse 40% 46% at 20% 22%,
+      #68ad90 0%,
+      #68ad90 42%,
+      transparent 72%),
+    radial-gradient(ellipse 34% 40% at 55% 45%,
+      #68ad90 0%,
+      #68ad90 35%,
+      transparent 68%),
+    radial-gradient(ellipse 28% 32% at 70% 62%,
+      #68ad90 0%,
+      #68ad90 30%,
+      transparent 65%),
+    
+    /* ===== ACCENT PINK: Top-right zone — organic masses (v1 style) ===== */
+    radial-gradient(ellipse 32% 28% at 78% 22%,
+      #fcdcf4 0%,
+      #fcdcf4 40%,
+      transparent 68%),
+    radial-gradient(ellipse 22% 18% at 62% 36%,
+      #fcdcf4 0%,
+      #fcdcf4 30%,
       transparent 60%),
-    /* Top-left subtle ink */
-    radial-gradient(ellipse 30% 25% at 4% 4%,
-      rgba(18, 18, 19, 0.5) 0%,
+    radial-gradient(ellipse 16% 20% at 68% 48%,
+      #fcdcf4 0%,
+      #fcdcf4 25%,
+      transparent 58%),
+    
+    /* ===== ACCENT CYAN: Bottom-left zone — organic masses (v1 style, larger) ===== */
+    radial-gradient(ellipse 36% 32% at 22% 76%,
+      #daf6fd 0%,
+      #daf6fd 42%,
+      transparent 70%),
+    radial-gradient(ellipse 26% 22% at 38% 62%,
+      #daf6fd 0%,
+      #daf6fd 35%,
+      transparent 62%),
+    radial-gradient(ellipse 20% 18% at 44% 56%,
+      #daf6fd 0%,
+      #daf6fd 28%,
+      transparent 58%),
+    
+    /* ===== ACCENT GREEN: Center cluster ===== */
+    radial-gradient(ellipse 30% 24% at 50% 48%,
+      #a7c790 0%,
+      #a7c790 45%,
+      transparent 68%),
+    radial-gradient(ellipse 22% 18% at 44% 34%,
+      #a7c790 0%,
+      #a7c790 35%,
+      transparent 62%),
+    radial-gradient(ellipse 18% 20% at 56% 56%,
+      #a7c790 0%,
+      #a7c790 30%,
+      transparent 60%),
+    
+    /* ===== EDGE CONVERGENCE ===== */
+    conic-gradient(from 88deg at 50% -8%,
+      transparent 0deg,
+      #68ad90 12deg,
+      #daf6fd 35deg,
+      #fcdcf4 58deg,
+      #a7c790 82deg,
+      #2d775b 105deg,
+      transparent 125deg),
+    
+    /* ===== INK ANCHORS ===== */
+    radial-gradient(ellipse 55% 48% at 98% 98%,
+      rgba(18,18,19,0.95) 0%,
+      rgba(18,18,19,0.65) 30%,
+      transparent 68%),
+    radial-gradient(ellipse 50% 42% at 2% 98%,
+      rgba(18,18,19,0.9) 0%,
+      rgba(18,18,19,0.55) 35%,
+      transparent 70%),
+    radial-gradient(ellipse 40% 32% at 96% 4%,
+      rgba(18,18,19,0.5) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 34% 28% at 4% 4%,
+      rgba(18,18,19,0.45) 0%,
       transparent 58%);
 }
-
 .soft-shadow {
   box-shadow: 0 30px 60px -20px rgba(18, 18, 19, 0.4), 0 8px 20px -8px rgba(18, 18, 19, 0.15);
 }
