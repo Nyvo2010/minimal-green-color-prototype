@@ -1,0 +1,1 @@
+Only push or commit when user says you should, never automatically.

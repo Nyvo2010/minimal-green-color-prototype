@@ -116,7 +116,7 @@ Serif lines often pair a full-opacity phrase with a `50–60%` continuation.
 
 ## v2 Gradient
 
-Two main greens (`#2D775B`, `#68AD90`) with three accents (`#A7C790`, `#FCDCF4`, `#DAF6FD`) — **pink and cyan are more prominent**. Abstract organic shapes using conic gradients, elliptical gradients with varied ratios, and angular linear sweeps. Higher contrast, less uniform blobs.
+Two main greens (`#2D775B`, `#68AD90`) with three accents (`#A7C790`, `#FCDCF4`, `#DAF6FD`) — **pink and cyan are much more prominent**. Abstract organic shapes using conic gradients, elliptical gradients with varied ratios, and angular linear sweeps. Higher contrast, more dynamic, consistent visual language.
 
 ```
 base: #2D775B; inset: -15%; filter: blur(12px) contrast(1.2)
@@ -131,57 +131,63 @@ linear-gradient(45deg, transparent 18%, #68AD90 35%, #68AD90 52%, transparent 68
 radial-gradient(ellipse 30% 22% at 72% 12%, #68AD90 0%, #68AD90 45%, transparent 68%)
 radial-gradient(ellipse 22% 28% at 28% 88%, #68AD90 0%, #68AD90 40%, transparent 70%)
 
-/* Accent pink - PROMINENT - large conic bursts */
-conic-gradient(from 180deg at 82% 22%, transparent 0deg, #FCDCF4 35deg, #FCDCF4 95deg, #FCDCF4 130deg, transparent 180deg)
-radial-gradient(ellipse 25% 30% at 18% 58%, #FCDCF4 0%, #FCDCF4 50%, transparent 72%)
+/* Accent pink - VERY PROMINENT - large conic bursts (wider angle) */
+conic-gradient(from 160deg at 82% 22%, transparent 0deg, #FCDCF4 25deg, #FCDCF4 110deg, #FCDCF4 145deg, transparent 190deg)
+radial-gradient(ellipse 28% 32% at 18% 58%, #FCDCF4 0%, #FCDCF4 50%, transparent 72%)
 
-/* Accent cyan - PROMINENT - conic burst & angular sweep */
-conic-gradient(from -60deg at 15% 78%, transparent 0deg, #DAF6FD 50deg, #DAF6FD 110deg, transparent 160deg)
-linear-gradient(20deg, transparent 25%, #DAF6FD 42%, #DAF6FD 58%, transparent 75%)
+/* Accent cyan - VERY PROMINENT - conic burst & angular sweeps */
+conic-gradient(from -80deg at 15% 78%, transparent 0deg, #DAF6FD 45deg, #DAF6FD 120deg, transparent 170deg)
+linear-gradient(35deg, transparent 20%, #DAF6FD 38%, #DAF6FD 62%, transparent 80%)
+conic-gradient(from 45deg at 65% 18%, transparent 0deg, #DAF6FD 35deg, #DAF6FD 70deg, transparent 110deg)
 
-/* Accent green - organic center shapes */
-radial-gradient(ellipse 28% 20% at 48% 45%, #A7C790 0%, #A7C790 45%, transparent 68%)
-radial-gradient(ellipse 20% 16% at 58% 30%, #A7C790 0%, transparent 65%)
+/* Accent green - organic center shapes + sweep (more prominent) */
+radial-gradient(ellipse 32% 24% at 48% 45%, #A7C790 0%, #A7C790 50%, transparent 70%)
+radial-gradient(ellipse 24% 18% at 58% 30%, #A7C790 0%, transparent 68%)
+linear-gradient(160deg, transparent 30%, #A7C790 50%, transparent 70%)
 
-/* Ink depth anchors - stronger */
+/* Ink depth anchors - stronger contrast */
 radial-gradient(ellipse 55% 48% at 96% 96%, rgba(18,18,19,.95) 0%, rgba(18,18,19,.7) 35%, transparent 70%)
 radial-gradient(ellipse 48% 42% at 4% 96%, rgba(18,18,19,.85) 0%, rgba(18,18,19,.5) 40%, transparent 72%)
 
 /* Sharp angular multi-color accent - top edge */
-conic-gradient(from 90deg at 50% -10%, transparent 0deg, #68AD90 25deg, #DAF6FD 50deg, #FCDCF4 75deg, transparent 120deg)
+conic-gradient(from 90deg at 50% -10%, transparent 0deg, #68AD90 20deg, #DAF6FD 45deg, #FCDCF4 70deg, #A7C790 95deg, transparent 130deg)
 ```
 
 Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.55`.
 
-## v1 Gradient (Archived)
+## v1 Gradient (Original proportions, abstract shapes)
 
-Green base with abstract organic shapes — sweeping diagonals, conic bursts, elliptical wedges. Higher contrast than original.
+**Same color proportions as original** — green dominates, small accent splashes only. Abstract organic shapes: sweeping diagonals, conic bursts, elliptical wedges. Higher contrast than original.
 
 ```
 base: #2C5F2D; inset: -15%; filter: blur(12px) contrast(1.2)
 
-/* Main light - sweeping diagonal band */
-linear-gradient(125deg, transparent 15%, #97BC62 30%, #97BC62 45%, transparent 60%)
+/* Main light - sweeping diagonal (was 115deg at 28-58%) */
+linear-gradient(115deg, transparent 25%, #97BC62 40%, #97BC62 55%, transparent 70%)
 
-/* Accent pink - conic burst from top-right */
-conic-gradient(from 210deg at 85% 10%, transparent 0deg, #F4A9C4 45deg, #F4A9C4 90deg, transparent 135deg)
+/* Main light - organic elliptical mass top-left (was 38% 45% at 16% 14%) */
+radial-gradient(ellipse 38% 45% at 16% 14%, #97BC62 0%, #97BC62 30%, transparent 70%)
 
-/* Accent lilac - elliptical wedge */
-radial-gradient(ellipse 35% 50% at 75% 15%, #BDA9F2 0%, #BDA9F2 40%, transparent 75%)
+/* Main light - organic elliptical mass mid-right (was 34% 40% at 60% 38%) */
+radial-gradient(ellipse 34% 40% at 60% 38%, #97BC62 0%, #97BC62 20%, transparent 70%)
 
-/* Accent orange - angular sweep */
-conic-gradient(from -30deg at 92% 30%, transparent 0deg, #F6A25E 60deg, transparent 120deg)
+/* Accent lilac - conic burst top-right (was radial 9% 12% at 74% 9%) */
+conic-gradient(from 180deg at 74% 9%, transparent 0deg, #BDA9F2 25deg, #BDA9F2 55deg, transparent 90deg)
 
-/* Main light - organic blob cluster top-left */
-radial-gradient(ellipse 40% 30% at 18% 20%, #97BC62 0%, #97BC62 35%, transparent 70%)
-radial-gradient(ellipse 25% 35% at 35% 8%, #97BC62 0%, transparent 65%)
+/* Accent orange - angular sweep top-right (was radial 10% 14% at 92% 27%) */
+conic-gradient(from -45deg at 92% 27%, transparent 0deg, #F6A25E 40deg, #F6A25E 75deg, transparent 110deg)
 
-/* Ink anchors - deep corners */
-radial-gradient(ellipse 50% 45% at 92% 92%, rgba(18,18,19,.95) 0%, rgba(18,18,19,.6) 40%, transparent 75%)
-radial-gradient(ellipse 45% 40% at 8% 94%, rgba(18,18,19,.8) 0%, rgba(18,18,19,.4) 45%, transparent 75%)
+/* Accent pink - elliptical wedge top-right (was radial 15% 20% at 84% 17%) */
+radial-gradient(ellipse 18% 22% at 84% 17%, #F4A9C4 0%, #F4A9C4 35%, transparent 70%)
 
-/* Accent green sweep */
-linear-gradient(60deg, transparent 40%, #97BC62 55%, transparent 70%)
+/* Accent sky - small conic bottom-left for balance */
+conic-gradient(from 90deg at 15% 85%, transparent 0deg, #A5D8F0 30deg, transparent 60deg)
+
+/* Ink depth - bottom right anchor (was 45% 50% at 88% 94%) */
+radial-gradient(ellipse 48% 50% at 92% 92%, rgba(18,18,19,.9) 0%, rgba(18,18,19,.5) 40%, transparent 72%)
+
+/* Ink depth - bottom left anchor (was 40% 40% at 6% 96%) */
+radial-gradient(ellipse 42% 38% at 8% 96%, rgba(18,18,19,.7) 0%, rgba(18,18,19,.35) 45%, transparent 72%)
 ```
 
 Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.55`.
