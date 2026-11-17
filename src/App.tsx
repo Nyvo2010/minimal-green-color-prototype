@@ -7,16 +7,14 @@ const colors = [
   { name: "Ink box", role: "Box on light", hex: "#1F1F21", cls: "bg-ink-box text-paper" },
   { name: "Paper", role: "Light bg (warm)", hex: "#FAF9F6", cls: "bg-paper text-ink ring-1 ring-ink/10" },
   { name: "Paper box", role: "Box on light · or on dark", hex: "#F0EFE9", cls: "bg-paper-box text-ink" },
-  { name: "Forest", role: "Green, dark", hex: "#2C5F2D", cls: "bg-forest text-paper" },
-  { name: "Moss", role: "Green, light", hex: "#97BC62", cls: "bg-moss text-ink" },
+  { name: "Forest", role: "Green, dark (v2)", hex: "#2D775B", cls: "bg-forest text-paper" },
+  { name: "Moss", role: "Green, light (v2)", hex: "#68AD90", cls: "bg-moss text-ink" },
 ];
 
 const splashes = [
-  { name: "Pink", hex: "#F4A9C4" },
-  { name: "Orange", hex: "#F6A25E" },
-  { name: "Lilac", hex: "#BDA9F2" },
-  { name: "Sky", hex: "#A5D8F0" },
-  { name: "Cyan", hex: "#64C8DC" },
+  { name: "Accent Green", hex: "#A7C790" },
+  { name: "Accent Pink", hex: "#FCDCF4" },
+  { name: "Accent Cyan", hex: "#DAF6FD" },
 ];
 
 /* ---------------- Helpers ---------------- */

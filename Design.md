@@ -2,8 +2,8 @@
 
 ## Versions
 
-- **v1** — Original: pure white paper, brighter greens, stronger splash colors
-- **v2** — Current: warm beige paper (`#FAF9F6` / `#F0EFE9`), muted gradient with more pink/cyan, less green dominance
+- **v1** — Original: pure white paper, brighter greens (`#2C5F2D` / `#97BC62`), stronger splash colors
+- **v2** — Current: warm beige paper (`#FAF9F6` / `#F0EFE9`), new green palette with 2 main colors + 3 accents in equal proportion
 
 ---
 
@@ -15,14 +15,14 @@
 | `ink-box` | `#1F1F21` | Boxes on ink |
 | `paper` | `#FAF9F6` | Light page background (warm beige) |
 | `paper-box` | `#F0EFE9` | Boxes on light; also a box on ink |
-| `forest` | `#2C5F2D` | Green, dark |
-| `moss` | `#97BC62` | Green, light |
+| `forest` | `#2D775B` | Green, dark (main) |
+| `moss` | `#68AD90` | Green, light (main) |
 
-Splash colours — gradients only, never fills or text:
+Gradient accents — gradients only, never fills or text (used in roughly equal proportion with the two main greens):
 
-| Pink | Orange | Lilac | Sky | Cyan |
-|---|---|---|---|---|
-| `#F4A9C4` | `#F6A25E` | `#BDA9F2` | `#A5D8F0` | `#64C8DC` |
+| Accent Green | Accent Pink | Accent Cyan |
+|---|---|---|
+| `#A7C790` | `#FCDCF4` | `#DAF6FD` |
 
 Text hierarchy comes from opacity, not extra greys: secondary `60–70%`, labels `50%`, placeholders `40%`.
 
@@ -112,20 +112,37 @@ Serif lines often pair a full-opacity phrase with a `50–60%` continuation.
 
 ## v2 Gradient
 
-Muted green base with more pink/cyan/sky, less green dominance.
+Two main greens (`#2D775B`, `#68AD90`) with three accents (`#A7C790`, `#FCDCF4`, `#DAF6FD`) in roughly equal visual proportion.
 
 ```
-base: #2A5A2A; inset: -10%; filter: blur(10px) contrast(1.12)
+base: #2D775B; inset: -10%; filter: blur(10px) contrast(1.12)
 
-radial-gradient(12% 15% at 70% 10%, rgba(244,169,196,.75), transparent 100%)
-radial-gradient(10% 12% at 88% 25%, rgba(100,200,220,.7), transparent 100%)
-radial-gradient(14% 18% at 82% 15%, rgba(189,169,242,.6), transparent 100%)
-radial-gradient(10% 12% at 15% 85%, rgba(165,216,240,.75), transparent 100%)
-linear-gradient(115deg, transparent 28%, rgba(151,188,98,.35) 42%, transparent 58%)
-radial-gradient(35% 42% at 18% 16%, rgba(151,188,98,.7), transparent 70%)
-radial-gradient(30% 35% at 62% 40%, rgba(151,188,98,.25), transparent 70%)
-radial-gradient(45% 50% at 88% 94%, rgba(18,18,19,.8), transparent 72%)
-radial-gradient(40% 40% at 6% 96%, rgba(18,18,19,.6), transparent 72%)
+/* Main dark - large, deep */
+radial-gradient(28% 32% at 15% 20%, #2D775B 0%, transparent 75%)
+radial-gradient(22% 26% at 85% 80%, #2D775B 0%, transparent 75%)
+
+/* Main light - medium */
+radial-gradient(20% 24% at 75% 15%, #68AD90 0%, transparent 70%)
+radial-gradient(18% 22% at 25% 85%, #68AD90 0%, transparent 70%)
+
+/* Accent green - medium */
+radial-gradient(16% 20% at 45% 10%, #A7C790 0%, transparent 65%)
+radial-gradient(14% 18% at 55% 90%, #A7C790 0%, transparent 65%)
+
+/* Accent pink - medium */
+radial-gradient(15% 18% at 80% 40%, #FCDCF4 0%, transparent 65%)
+radial-gradient(13% 16% at 20% 60%, #FCDCF4 0%, transparent 65%)
+
+/* Accent cyan - medium */
+radial-gradient(14% 17% at 10% 35%, #DAF6FD 0%, transparent 65%)
+radial-gradient(16% 20% at 90% 65%, #DAF6FD 0%, transparent 65%)
+
+/* Connective linear gradient between main colors */
+linear-gradient(135deg, transparent 30%, #68AD90 50%, transparent 70%)
+
+/* Ink depth corners */
+radial-gradient(40% 45% at 95% 95%, rgba(18,18,19,.7) 0%, transparent 70%)
+radial-gradient(35% 40% at 5% 95%, rgba(18,18,19,.55) 0%, transparent 70%)
 ```
 
 Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.55`.
@@ -160,8 +177,8 @@ Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mo
   --color-ink-box: #1f1f21;
   --color-paper: #faf9f6;
   --color-paper-box: #f0efe9;
-  --color-forest: #2c5f2d;
-  --color-moss: #97bc62;
+  --color-forest: #2d775b;
+  --color-moss: #68ad90;
 
   --radius-card: 24px;
   --radius-inner: 16px;
@@ -187,7 +204,7 @@ Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mo
   --color-ink-box: #1f1f21;
   --color-paper: #faf9f6;
   --color-paper-box: #f0efe9;
-  --color-forest: #2c5f2d;
-  --color-moss: #97bc62;
+  --color-forest: #2d775b;
+  --color-moss: #68ad90;
 }
 ```

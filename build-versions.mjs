@@ -15,18 +15,19 @@ const v1Colors = {
   sky: 'rgba(165, 216, 240, 0.85)',
 };
 
-// v2 colors (muted, more pink/cyan, beige paper)
+// v2 colors (new palette: 2 main greens + 3 accents in equal proportion)
 const v2Colors = {
   paper: '#faf9f6',
   paperBox: '#f0efe9',
-  forest: '#2c5f2d',
-  moss: '#97bc62',
-  base: '#2a5a2a',
-  pink: 'rgba(244, 169, 196, 0.75)',
-  orange: 'rgba(246, 162, 94, 0.5)',
-  lilac: 'rgba(189, 169, 242, 0.6)',
-  sky: 'rgba(165, 216, 240, 0.75)',
-  cyan: 'rgba(100, 200, 220, 0.7)',
+  forest: '#2d775b',
+  moss: '#68ad90',
+  base: '#2d775b',
+  // These are used in the gradient blobs via --main-dark, --main-light, --accent-green, --accent-pink, --accent-cyan
+  mainDark: '#2d775b',
+  mainLight: '#68ad90',
+  accentGreen: '#a7c790',
+  accentPink: '#fcdcf4',
+  accentCyan: '#daf6fd',
 };
 
 function generateCSS(colors, version) {
@@ -41,15 +42,26 @@ function generateCSS(colors, version) {
     radial-gradient(40% 40% at 6% 96%, rgba(18, 18, 19, 0.7) 0%, transparent 72%)`;
 
   const blobsV2 = `
-    radial-gradient(12% 15% at 70% 10%, var(--pink) 0%, transparent 100%),
-    radial-gradient(10% 12% at 88% 25%, var(--cyan) 0%, transparent 100%),
-    radial-gradient(14% 18% at 82% 15%, var(--lilac) 0%, transparent 100%),
-    radial-gradient(10% 12% at 15% 85%, var(--sky) 0%, transparent 100%),
-    linear-gradient(115deg, transparent 28%, rgba(151, 188, 98, 0.35) 42%, transparent 58%),
-    radial-gradient(35% 42% at 18% 16%, rgba(151, 188, 98, 0.7) 0%, transparent 70%),
-    radial-gradient(30% 35% at 62% 40%, rgba(151, 188, 98, 0.25) 0%, transparent 70%),
-    radial-gradient(45% 50% at 88% 94%, rgba(18, 18, 19, 0.8) 0%, transparent 72%),
-    radial-gradient(40% 40% at 6% 96%, rgba(18, 18, 19, 0.6) 0%, transparent 72%)`;
+    /* Main dark - large, deep */
+    radial-gradient(28% 32% at 15% 20%, var(--main-dark) 0%, transparent 75%),
+    radial-gradient(22% 26% at 85% 80%, var(--main-dark) 0%, transparent 75%),
+    /* Main light - medium */
+    radial-gradient(20% 24% at 75% 15%, var(--main-light) 0%, transparent 70%),
+    radial-gradient(18% 22% at 25% 85%, var(--main-light) 0%, transparent 70%),
+    /* Accent green - medium */
+    radial-gradient(16% 20% at 45% 10%, var(--accent-green) 0%, transparent 65%),
+    radial-gradient(14% 18% at 55% 90%, var(--accent-green) 0%, transparent 65%),
+    /* Accent pink - medium */
+    radial-gradient(15% 18% at 80% 40%, var(--accent-pink) 0%, transparent 65%),
+    radial-gradient(13% 16% at 20% 60%, var(--accent-pink) 0%, transparent 65%),
+    /* Accent cyan - medium */
+    radial-gradient(14% 17% at 10% 35%, var(--accent-cyan) 0%, transparent 65%),
+    radial-gradient(16% 20% at 90% 65%, var(--accent-cyan) 0%, transparent 65%),
+    /* Connective linear gradient between main colors */
+    linear-gradient(135deg, transparent 30%, var(--main-light) 50%, transparent 70%),
+    /* Ink depth corners */
+    radial-gradient(40% 45% at 95% 95%, rgba(18, 18, 19, 0.7) 0%, transparent 70%),
+    radial-gradient(35% 40% at 5% 95%, rgba(18, 18, 19, 0.55) 0%, transparent 70%)`;
 
   const blobs = version === 'v2' ? blobsV2 : blobsV1;
 
@@ -88,8 +100,7 @@ body {
   font-variation-settings: "opsz" 96;
 }
 
-/* ---------- Grainy gradients ----------
-   Green + white dominate. Small splashes of pink / orange / lilac / sky only. */
+/* ---------- Grainy gradients ---------- */
 
 .grad {
   position: relative;
@@ -124,13 +135,13 @@ body {
 
 /* Splash colours (gradients only) */
 .grad {
-  --pink: ${colors.pink};
-  --orange: ${colors.orange};
-  --lilac: ${colors.lilac};
-  --sky: ${colors.sky};
+  --main-dark: ${colors.mainDark};
+  --main-light: ${colors.mainLight};
+  --accent-green: ${colors.accentGreen};
+  --accent-pink: ${colors.accentPink};
+  --accent-cyan: ${colors.accentCyan};
   --base: ${colors.base};
   --blobs:${blobs};
-${colors.cyan ? `  --cyan: ${colors.cyan};` : ''}
 }
 
 .soft-shadow {
