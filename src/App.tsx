@@ -389,10 +389,10 @@ function SpecPage({ version }: { version: "v1" | "v2" }) {
         <div className="mb-8 flex items-center justify-between">
           <h1 className="serif text-5xl sm:text-6xl">Palette & type</h1>
           <nav className="flex gap-4">
-            <NavLink to="/v1" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
+            <NavLink to="v1" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
               v1
             </NavLink>
-            <NavLink to="/v2" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
+            <NavLink to="v2" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
               v2
             </NavLink>
           </nav>
@@ -476,9 +476,11 @@ function RedirectHandler() {
 
 /* ---------------- App ---------------- */
 
+const BASENAME = import.meta.env.BASE_URL.replace(/\/$/, ""); // Remove trailing slash
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={BASENAME}>
       <RedirectHandler />
       <Routes>
         <Route path="/" element={<SpecPage version="v2" />} />
