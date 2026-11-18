@@ -7,10 +7,13 @@ import { defineConfig } from "vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Use environment variable for base path, fallback to root for local dev
-const base = process.env.BASE_PATH || "/";
+// GitHub Pages repo name - set this to your repo name
+const REPO_NAME = "minimal-green-color-prototype";
 
-// https://vite.dev/config/
+// For GitHub Pages, base should be /<repo-name>/
+// For local dev, base should be /
+const base = process.env.GITHUB_PAGES === "true" ? `/${REPO_NAME}/` : "/";
+
 export default defineConfig({
   base,
   plugins: [react(), tailwindcss()],

@@ -1,5 +1,5 @@
 import { useState, useEffect, type ReactNode } from "react";
-import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation, NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
 
 /* ---------------- Spec data ---------------- */
 
@@ -457,51 +457,31 @@ function SpecPage({ version }: { version: "v1" | "v2" }) {
   );
 }
 
-/* ---------------- Landing Page ---------------- */
+/* ---------------- Redirect Handler ---------------- */
 
-function LandingPage() {
-  const navigate = useNavigate();
+function RedirectHandler() {
   const location = useLocation();
-
-  // Auto-redirect to v2 on root (handle both with and without basename)
+  
   useEffect(() => {
-    if (location.pathname === "/" || location.pathname === "") {
-      navigate("/v2", { replace: true });
+    const params = new URLSearchParams(location.search);
+    const redirect = params.get('redirect');
+    if (redirect) {
+      // Clean URL without redirect param
+      window.history.replaceState(null, '', redirect);
     }
-  }, [location.pathname, navigate]);
-
-  // Render nothing while redirecting
-  if (location.pathname === "/" || location.pathname === "") {
-    return null;
-  }
-
-  return (
-    <div className="bg-paper text-ink min-h-screen flex items-center justify-center px-4">
-      <div className="text-center max-w-md">
-        <h1 className="serif text-5xl sm:text-6xl mb-4">Colour Palette Test Site</h1>
-        <p className="mb-8 opacity-60">Select a version to view the design system</p>
-        <div className="flex flex-col gap-4">
-          <NavLink to="/v2" className="bg-forest text-paper px-8 py-4 rounded-full font-medium transition hover:opacity-90">
-            v2 — Current (muted greens, warm paper)
-          </NavLink>
-          <NavLink to="/v1" className="bg-paper-box text-ink px-8 py-4 rounded-full font-medium transition hover:opacity-70 border border-ink/10">
-            v1 — Original (bright greens, pure white)
-          </NavLink>
-        </div>
-      </div>
-    </div>
-  );
+  }, [location.search]);
+  
+  return null;
 }
 
 /* ---------------- App ---------------- */
 
-const BASENAME = import.meta.env.BASE_URL || "/";
-
 export default function App() {
   return (
-    <BrowserRouter basename={BASENAME}>
+    <BrowserRouter>
+      <RedirectHandler />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<SpecPage version="v2" />} />
         <Route path="/v1" element={<SpecPage version="v1" />} />
         <Route path="/v2" element={<SpecPage version="v2" />} />
         <Route path="*" element={<div className="bg-paper text-ink min-h-screen flex items-center justify-center"><h1 className="serif text-4xl">404 - Not Found</h1></div>} />
