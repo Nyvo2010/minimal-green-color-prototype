@@ -1,5 +1,4 @@
-import { useState, useEffect, type ReactNode } from "react";
-import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { useState, type ReactNode } from "react";
 
 /* ---------------- Spec data ---------------- */
 
@@ -217,7 +216,7 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
                 >
                   <span
                     className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
-                      on ? `left-[22px] ${knob}` : `left-0.5 ${accentBg}`}
+                      on ? `left-[22px] ${knob}` : `left-0.5 ${accentBg}`
                     }`}
                   />
                 </button>
@@ -366,35 +365,37 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
   );
 }
 
-/* ---------------- Version Layout ---------------- */
-
-function VersionLayout({ version, children }: { version: "v1" | "v2"; children: ReactNode }) {
-  useEffect(() => {
-    document.documentElement.setAttribute("data-version", version);
-  }, [version]);
-
-  return <div className="bg-paper text-ink min-h-screen">{children}</div>;
-}
-
 /* ---------------- Spec Page ---------------- */
 
-function SpecPage({ version }: { version: "v1" | "v2" }) {
+const base = import.meta.env.BASE_URL;
+
+export default function SpecPage({ version }: { version: "v1" | "v2" }) {
   const colors = version === "v1" ? v1Colors : v2Colors;
   const splashes = version === "v1" ? v1Splashes : v2Splashes;
   const versionLabel = version === "v1" ? "v1 (Original)" : "v2 (Current)";
 
   return (
-    <VersionLayout version={version}>
+    <div className="bg-paper text-ink min-h-screen">
       <header className="mx-auto max-w-6xl px-6 pb-20 pt-16 sm:px-10">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="serif text-5xl sm:text-6xl">Palette & type</h1>
           <nav className="flex gap-4">
-            <NavLink to="v1" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
+            <a
+              href={`${base}v1/`}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70 ${
+                version === "v1" ? "bg-forest text-paper" : ""
+              }`}
+            >
               v1
-            </NavLink>
-            <NavLink to="v2" className="px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70" end>
+            </a>
+            <a
+              href={`${base}v2/`}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70 ${
+                version === "v2" ? "bg-forest text-paper" : ""
+              }`}
+            >
               v2
-            </NavLink>
+            </a>
           </nav>
         </div>
 
@@ -453,41 +454,6 @@ function SpecPage({ version }: { version: "v1" | "v2" }) {
 
       <Preview mode="light" />
       <Preview mode="dark" />
-    </VersionLayout>
-  );
-}
-
-/* ---------------- Redirect Handler ---------------- */
-
-function RedirectHandler() {
-  const location = useLocation();
-  
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const redirect = params.get('redirect');
-    if (redirect) {
-      // Clean URL without redirect param
-      window.history.replaceState(null, '', redirect);
-    }
-  }, [location.search]);
-  
-  return null;
-}
-
-/* ---------------- App ---------------- */
-
-const BASENAME = import.meta.env.BASE_URL.replace(/\/$/, ""); // Remove trailing slash
-
-export default function App() {
-  return (
-    <BrowserRouter basename={BASENAME}>
-      <RedirectHandler />
-      <Routes>
-        <Route path="/" element={<SpecPage version="v2" />} />
-        <Route path="/v1" element={<SpecPage version="v1" />} />
-        <Route path="/v2" element={<SpecPage version="v2" />} />
-        <Route path="*" element={<div className="bg-paper text-ink min-h-screen flex items-center justify-center"><h1 className="serif text-4xl">404 - Not Found</h1></div>} />
-      </Routes>
-    </BrowserRouter>
+    </div>
   );
 }

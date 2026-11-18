@@ -7,25 +7,109 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
       rel="stylesheet"
     />
-    <script>
-      // Handle GitHub Pages SPA redirect from 404.html
-      // Check for redirect parameter before React Router initializes
-      (function() {
-        var redirectParam = new URLSearchParams(window.location.search).get('redirect');
-        if (redirectParam) {
-          // Replace the URL with the clean path (no redirect param)
-          // Use replaceState to avoid adding to history
-          var cleanUrl = window.location.pathname + redirectParam;
-          window.history.replaceState(null, '', cleanUrl);
-        }
-      })();
-    </script>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #121213;
+        --paper: #faf9f6;
+        --forest: #2d775b;
+        --moss: #68ad90;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      main {
+        width: 100%;
+        max-width: 720px;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        font-weight: 430;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      p {
+        margin: 0 0 40px;
+        opacity: 0.5;
+      }
+      .versions {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      a {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 200px;
+        padding: 28px;
+        border-radius: 24px;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 160ms ease, opacity 160ms ease;
+      }
+      a:hover {
+        transform: translateY(-2px);
+        opacity: 0.92;
+      }
+      .v1 {
+        background: #2c5f2d;
+        color: #fff;
+      }
+      .v2 {
+        background: #2d775b;
+        color: #faf9f6;
+      }
+      .label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        opacity: 0.6;
+      }
+      .name {
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 3.5rem;
+        line-height: 1;
+      }
+      .hint {
+        font-size: 0.8rem;
+        opacity: 0.6;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <main>
+      <h1>Colour palette</h1>
+      <p>Two versions. Pick one.</p>
+      <div class="versions">
+        <a class="v1" href="./v1/">
+          <span class="label">Original</span>
+          <span class="name">v1</span>
+          <span class="hint">Forest &amp; moss</span>
+        </a>
+        <a class="v2" href="./v2/">
+          <span class="label">Current</span>
+          <span class="name">v2</span>
+          <span class="hint">Green with pink &amp; cyan accents</span>
+        </a>
+      </div>
+    </main>
   </body>
 </html>

@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import SpecPage from "./SpecPage";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <SpecPage version="v2" />
   </StrictMode>
 );
