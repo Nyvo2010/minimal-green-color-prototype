@@ -464,8 +464,14 @@ function LandingPage() {
   const location = useLocation();
 
   // Auto-redirect to v2 on root (handle both with and without basename)
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "") {
+      navigate("/v2", { replace: true });
+    }
+  }, [location.pathname, navigate]);
+
+  // Render nothing while redirecting
   if (location.pathname === "/" || location.pathname === "") {
-    navigate("/v2", { replace: true });
     return null;
   }
 
