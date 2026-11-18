@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./styles/v1.css";
 @import "./styles/v2.css";
+@import "./styles/v3.css";
 
 /* Default to v2 */
 :root {
@@ -219,6 +220,120 @@ body {
       #fcdcf4 58deg,
       #a7c790 82deg,
       #2d775b 105deg,
+      transparent 125deg),
+    
+    /* ===== INK ANCHORS ===== */
+    radial-gradient(ellipse 55% 48% at 98% 98%,
+      rgba(18,18,19,0.95) 0%,
+      rgba(18,18,19,0.65) 30%,
+      transparent 68%),
+    radial-gradient(ellipse 50% 42% at 2% 98%,
+      rgba(18,18,19,0.9) 0%,
+      rgba(18,18,19,0.55) 35%,
+      transparent 70%),
+    radial-gradient(ellipse 40% 32% at 96% 4%,
+      rgba(18,18,19,0.5) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 34% 28% at 4% 4%,
+      rgba(18,18,19,0.45) 0%,
+      transparent 58%);
+}
+/* v3 Gradient Blobs — v2 composition, greens midway v1↔v2, brighter accents */
+:root[data-version="v3"] {
+  --grad-blobs:
+    /* ===== BASE: Forest — deep anchors (v1 style) ===== */
+    radial-gradient(ellipse 60% 55% at 15% 25%,
+      #2d6b44 0%,
+      #2d6b44 35%,
+      transparent 75%),
+    radial-gradient(ellipse 55% 50% at 85% 75%,
+      #2d6b44 0%,
+      #2d6b44 30%,
+      transparent 72%),
+    
+    /* ===== MAIN GREEN: Moss — sweeping diagonal + organic masses (v1 style) ===== */
+    linear-gradient(118deg,
+      transparent 25%,
+      #80b579 42%,
+      #80b579 58%,
+      transparent 75%),
+    radial-gradient(ellipse 40% 46% at 20% 22%,
+      #80b579 0%,
+      #80b579 42%,
+      transparent 72%),
+    radial-gradient(ellipse 34% 40% at 55% 45%,
+      #80b579 0%,
+      #80b579 35%,
+      transparent 68%),
+    radial-gradient(ellipse 28% 32% at 70% 62%,
+      #80b579 0%,
+      #80b579 30%,
+      transparent 65%),
+    
+    /* ===== ACCENT PINK: Top-right zone — organic masses (v1 style) ===== */
+    radial-gradient(ellipse 32% 28% at 78% 22%,
+      #f5bce6 0%,
+      #f5bce6 40%,
+      transparent 68%),
+    radial-gradient(ellipse 22% 18% at 62% 36%,
+      #f5bce6 0%,
+      #f5bce6 30%,
+      transparent 60%),
+    radial-gradient(ellipse 16% 20% at 68% 48%,
+      #f5bce6 0%,
+      #f5bce6 25%,
+      transparent 58%),
+    
+    /* ===== ACCENT CYAN: Bottom-left zone — organic masses (v1 style, larger) ===== */
+    radial-gradient(ellipse 36% 32% at 22% 76%,
+      #b8e5f3 0%,
+      #b8e5f3 42%,
+      transparent 70%),
+    radial-gradient(ellipse 26% 22% at 38% 62%,
+      #b8e5f3 0%,
+      #b8e5f3 35%,
+      transparent 62%),
+    radial-gradient(ellipse 20% 18% at 44% 56%,
+      #b8e5f3 0%,
+      #b8e5f3 28%,
+      transparent 58%),
+    
+    /* ===== ACCENT GREEN: Center cluster ===== */
+    radial-gradient(ellipse 30% 24% at 50% 48%,
+      #a2cf81 0%,
+      #a2cf81 45%,
+      transparent 68%),
+    radial-gradient(ellipse 22% 18% at 44% 34%,
+      #a2cf81 0%,
+      #a2cf81 35%,
+      transparent 62%),
+    radial-gradient(ellipse 18% 20% at 56% 56%,
+      #a2cf81 0%,
+      #a2cf81 30%,
+      transparent 60%),
+    
+    /* ===== ACCENT ORANGE: Right edge, between the pink and the ink ===== */
+    radial-gradient(ellipse 30% 26% at 88% 46%,
+      #f7c3a1 0%,
+      #f7c3a1 40%,
+      transparent 68%),
+    radial-gradient(ellipse 20% 18% at 80% 58%,
+      #f7c3a1 0%,
+      #f7c3a1 32%,
+      transparent 62%),
+    radial-gradient(ellipse 16% 18% at 90% 62%,
+      #f7c3a1 0%,
+      #f7c3a1 28%,
+      transparent 58%),
+    
+    /* ===== EDGE CONVERGENCE ===== */
+    conic-gradient(from 88deg at 50% -8%,
+      transparent 0deg,
+      #80b579 12deg,
+      #b8e5f3 35deg,
+      #f5bce6 58deg,
+      #a2cf81 82deg,
+      #2d6b44 105deg,
       transparent 125deg),
     
     /* ===== INK ANCHORS ===== */

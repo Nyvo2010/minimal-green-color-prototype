@@ -1,0 +1,20 @@
+/* v3 Theme - v2 structure, greens midway between v1 and v2, brighter accents */
+:root[data-version="v3"] {
+  --color-ink: #121213;
+  --color-ink-box: #1f1f21;
+  --color-paper: #faf9f6;
+  --color-paper-box: #f0efe9;
+  /* Midpoint of v1 forest (#2c5f2d) and v2 forest (#2d775b) */
+  --color-forest: #2d6b44;
+  /* Midpoint of v1 moss (#97bc62) and v2 moss (#68ad90) */
+  --color-moss: #80b579;
+
+  --grad-base: #2d6b44;
+  --grad-main-dark: #2d6b44;
+  --grad-main-light: #80b579;
+  /* v2 accents, lifted a touch and pushed in saturation */
+  --grad-accent-green: #a2cf81;
+  --grad-accent-pink: #f5bce6;
+  --grad-accent-cyan: #b8e5f3;
+  --grad-accent-orange: #f7c3a1;
+}

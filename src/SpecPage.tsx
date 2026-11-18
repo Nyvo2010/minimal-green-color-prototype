@@ -20,6 +20,15 @@ const v2Colors = [
   { name: "Moss", role: "Green, light (v2)", hex: "#68AD90", cls: "bg-moss text-ink" },
 ];
 
+const v3Colors = [
+  { name: "Ink", role: "Dark bg · or box on white", hex: "#121213", cls: "bg-ink text-paper" },
+  { name: "Ink box", role: "Box on light", hex: "#1F1F21", cls: "bg-ink-box text-paper" },
+  { name: "Paper", role: "Light bg (warm)", hex: "#FAF9F6", cls: "bg-paper text-ink ring-1 ring-ink/10" },
+  { name: "Paper box", role: "Box on light · or on dark", hex: "#F0EFE9", cls: "bg-paper-box text-ink" },
+  { name: "Forest", role: "Green, dark (v1↔v2 midpoint)", hex: "#2D6B44", cls: "bg-forest text-paper" },
+  { name: "Moss", role: "Green, light (v1↔v2 midpoint)", hex: "#80B579", cls: "bg-moss text-ink" },
+];
+
 const v1Splashes = [
   { name: "Pink", hex: "#F4A9C4" },
   { name: "Orange", hex: "#F6A25E" },
@@ -31,6 +40,13 @@ const v2Splashes = [
   { name: "Accent Green", hex: "#A7C790" },
   { name: "Accent Pink", hex: "#FCDCF4" },
   { name: "Accent Cyan", hex: "#DAF6FD" },
+];
+
+const v3Splashes = [
+  { name: "Accent Green", hex: "#A2CF81" },
+  { name: "Accent Pink", hex: "#F5BCE6" },
+  { name: "Accent Cyan", hex: "#B8E5F3" },
+  { name: "Accent Orange", hex: "#F7C3A1" },
 ];
 
 /* ---------------- Helpers ---------------- */
@@ -369,33 +385,29 @@ function Preview({ mode }: { mode: "light" | "dark" }) {
 
 const base = import.meta.env.BASE_URL;
 
-export default function SpecPage({ version }: { version: "v1" | "v2" }) {
-  const colors = version === "v1" ? v1Colors : v2Colors;
-  const splashes = version === "v1" ? v1Splashes : v2Splashes;
-  const versionLabel = version === "v1" ? "v1 (Original)" : "v2 (Current)";
+export default function SpecPage({ version }: { version: "v1" | "v2" | "v3" }) {
+  const colors = version === "v1" ? v1Colors : version === "v2" ? v2Colors : v3Colors;
+  const splashes = version === "v1" ? v1Splashes : version === "v2" ? v2Splashes : v3Splashes;
+  const versionLabel = version === "v1" ? "v1 (Original)" : version === "v2" ? "v2 (Current)" : "v3 (Midpoint greens)";
+  const versions = ["v1", "v2", "v3"] as const;
 
   return (
     <div className="bg-paper text-ink min-h-screen">
       <header className="mx-auto max-w-6xl px-6 pb-20 pt-16 sm:px-10">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="serif text-5xl sm:text-6xl">Palette & type</h1>
-          <nav className="flex gap-4">
-            <a
-              href={`${base}v1/`}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70 ${
-                version === "v1" ? "bg-forest text-paper" : ""
-              }`}
-            >
-              v1
-            </a>
-            <a
-              href={`${base}v2/`}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70 ${
-                version === "v2" ? "bg-forest text-paper" : ""
-              }`}
-            >
-              v2
-            </a>
+          <nav className="flex gap-2">
+            {versions.map((v) => (
+              <a
+                key={v}
+                href={`${base}${v}/`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition hover:opacity-70 ${
+                  version === v ? "bg-forest text-paper" : ""
+                }`}
+              >
+                {v}
+              </a>
+            ))}
           </nav>
         </div>
 
