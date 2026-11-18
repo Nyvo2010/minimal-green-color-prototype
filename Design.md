@@ -3,15 +3,48 @@
 ## Versions
 
 - **v1** — Original: pure white paper (`#FFFFFF`), bright greens (`#2C5F2D` / `#97BC62`), stronger splash colors
-- **v2** — Current: warm beige paper (`#FAF9F6` / `#F0EFE9`), new green palette with 2 main colors + 3 accents in equal proportion
+- **v2** — Previous: warm beige paper (`#FAF9F6` / `#F0EFE9`), new green palette with 2 main colors + 3 accents in equal proportion
+- **v3** — Current: same paper & inks as v2, greens midway between v1 & v2 (`#2D6B44` / `#80B579`), three accents midway between v1 & v3 pastels
 
-Both versions are accessible as routes in the same SPA:
+All versions are accessible as static routes:
 - `/v1` — Original version
-- `/v2` — Current version (default)
+- `/v2` — Previous version
+- `/v3` — Current version (default)
 
 ---
 
-## v2 Colour (Current)
+## v3 Colour (Current)
+
+| Token | Hex | Role |
+|---|---|---|
+| `ink` | `#121213` | Dark page background; also a box on white |
+| `ink-box` | `#1F1F21` | Boxes on ink |
+| `paper` | `#FAF9F6` | Light page background (warm beige) |
+| `paper-box` | `#F0EFE9` | Boxes on light; also a box on ink |
+| `forest` | `#2D6B44` | Green, dark (midpoint v1↔v2) |
+| `moss` | `#80B579` | Green, light (midpoint v1↔v2) |
+
+Gradient accents — gradients only, never fills or text. Each sits midway between its v1 and v2 equivalents:
+
+| Accent Green | Accent Pink | Accent Orange |
+|---|---|---|
+| `#9DC672` | `#F5B3D5` | `#F7B380` |
+
+Text hierarchy comes from opacity, not extra greys: secondary `60–70%`, labels `50%`, placeholders `40%`.
+
+**Dark mode** — same six colours, roles swap (identical mapping to v2):
+
+| | Light | Dark |
+|---|---|---|
+| Background | `paper` | `ink` |
+| Box | `paper-box` | `ink-box` |
+| Accent | `forest` on `paper` | `moss` on `ink` |
+| Secondary accent | `moss` on `ink` | `forest` on `paper` |
+| Inverted box | `ink-box` | `paper-box` |
+
+---
+
+## v2 Colour (Previous)
 
 | Token | Hex | Role |
 |---|---|---|
@@ -155,6 +188,79 @@ conic-gradient(from 90deg at 50% -10%, transparent 0deg, #68AD90 20deg, #DAF6FD 
 
 Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.55`.
 
+## v3 Gradient
+
+Uses the exact v2 composition — same layer stack, same positions, same blur/contrast/grain treatment — with three changes:
+
+1. Base greens are the v1↔v2 midpoints (`#2D6B44` forest, `#80B579` moss).
+2. Cyan removed; its bottom-left slot becomes accent orange (`#F7B380` at 75% opacity).
+3. Pink (`#F5B3D5` at 90%) and orange inherit the old cyan slot's size/placement; green (`#9DC672` at 100%) keeps the centre cluster.
+
+```
+base: #2D6B44; inset: -15%; filter: blur(2px) contrast(1.2)
+
+/* ===== BASE: Forest — deep anchors ===== */
+radial-gradient(ellipse 60% 55% at 15% 25%,
+  #2D6B44 0%, #2D6B44 35%, transparent 75%),
+radial-gradient(ellipse 55% 50% at 85% 75%,
+  #2D6B44 0%, #2D6B44 30%, transparent 72%)
+
+/* ===== MAIN GREEN: Moss — sweeping diagonal + organic masses ===== */
+linear-gradient(118deg,
+  transparent 25%, #80B579 42%, #80B579 58%, transparent 75%),
+radial-gradient(ellipse 40% 46% at 20% 22%,
+  #80B579 0%, #80B579 42%, transparent 72%),
+radial-gradient(ellipse 34% 40% at 55% 45%,
+  #80B579 0%, #80B579 35%, transparent 68%),
+radial-gradient(ellipse 28% 32% at 70% 62%,
+  #80B579 0%, #80B579 30%, transparent 65%)
+
+/* ===== ACCENT PINK: Top-right zone ===== */
+radial-gradient(ellipse 32% 28% at 78% 22%,
+  #F5B3D5BF 0%, #F5B3D5BF 40%, transparent 68%),
+radial-gradient(ellipse 22% 18% at 62% 36%,
+  #F5B3D5BF 0%, #F5B3D5BF 30%, transparent 60%),
+radial-gradient(ellipse 16% 20% at 68% 48%,
+  #F5B3D5BF 0%, #F5B3D5BF 25%, transparent 58%)
+
+/* ===== ACCENT ORANGE: Bottom-left zone (replaces cyan) ===== */
+radial-gradient(ellipse 36% 32% at 22% 76%,
+  #F7B380BF 0%, #F7B380BF 42%, transparent 70%),
+radial-gradient(ellipse 26% 22% at 38% 62%,
+  #F7B380BF 0%, #F7B380BF 35%, transparent 62%),
+radial-gradient(ellipse 20% 18% at 44% 56%,
+  #F7B380BF 0%, #F7B380BF 28%, transparent 58%)
+
+/* ===== ACCENT GREEN: Center cluster ===== */
+radial-gradient(ellipse 30% 24% at 50% 48%,
+  #9DC672 0%, #9DC672 45%, transparent 68%),
+radial-gradient(ellipse 22% 18% at 44% 34%,
+  #9DC672 0%, #9DC672 35%, transparent 62%),
+radial-gradient(ellipse 18% 20% at 56% 56%,
+  #9DC672 0%, #9DC672 30%, transparent 60%)
+
+/* ===== EDGE CONVERGENCE ===== */
+conic-gradient(from 88deg at 50% -8%,
+  transparent 0deg,
+  #80B579 12deg,
+  #F5B3D5BF 48deg,
+  #9DC672 78deg,
+  #2D6B44 102deg,
+  transparent 125deg)
+
+/* ===== INK ANCHORS ===== */
+radial-gradient(ellipse 55% 48% at 98% 98%,
+  rgba(18,18,19,0.95) 0%, rgba(18,18,19,0.65) 30%, transparent 68%),
+radial-gradient(ellipse 50% 42% at 2% 98%,
+  rgba(18,18,19,0.9) 0%, rgba(18,18,19,0.55) 35%, transparent 70%),
+radial-gradient(ellipse 40% 32% at 96% 4%,
+  rgba(18,18,19,0.5) 0%, transparent 60%),
+radial-gradient(ellipse 34% 28% at 4% 4%,
+  rgba(18,18,19,0.45) 0%, transparent 58%)
+```
+
+Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.35`.
+
 ## v1 Gradient (Original proportions, abstract shapes)
 
 **Same color proportions as original** — green dominates, small accent splashes only. Abstract organic shapes: sweeping diagonals, conic bursts, elliptical wedges. Higher contrast than original.
@@ -192,7 +298,7 @@ radial-gradient(ellipse 42% 38% at 8% 96%, rgba(18,18,19,.7) 0%, rgba(18,18,19,.
 
 Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mode: overlay`, opacity `0.55`.
 
-## Tokens (v2)
+## Tokens (v3 — current)
 
 ```css
 :root {
@@ -203,8 +309,8 @@ Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mo
   --color-ink-box: #1f1f21;
   --color-paper: #faf9f6;
   --color-paper-box: #f0efe9;
-  --color-forest: #2d775b;
-  --color-moss: #68ad90;
+  --color-forest: #2d6b44;
+  --color-moss: #80b579;
 
   --radius-card: 24px;
   --radius-inner: 16px;
@@ -230,8 +336,8 @@ Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mo
   --color-ink-box: #1f1f21;
   --color-paper: #faf9f6;
   --color-paper-box: #f0efe9;
-  --color-forest: #2d775b;
-  --color-moss: #68ad90;
+  --color-forest: #2d6b44;
+  --color-moss: #80b579;
 }
 ```
 
@@ -241,12 +347,14 @@ Overlay two desaturated `feTurbulence` noise tiles (260px, 520px), `mix-blend-mo
 npm run dev
 # Opens at http://localhost:5173/
 # - /v1 shows original version
-# - /v2 shows current version (default)
+# - /v2 shows previous version
+# - /v3 shows current version (default)
 ```
 
 ## GitHub Pages Deployment
 
 The site is deployed to `https://nyvo2010.github.io/minimal-green-color-prototype/` with routes:
-- `/` → redirects to `/v2`
+- `/` → redirects to `/v3`
 - `/v1` → original version
-- `/v2` → current version
+- `/v2` → previous version
+- `/v3` → current version
