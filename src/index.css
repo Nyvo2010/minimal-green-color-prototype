@@ -238,10 +238,10 @@ body {
       rgba(18,18,19,0.45) 0%,
       transparent 58%);
 }
-/* v3 Gradient Blobs — v2 composition, greens midway v1↔v2, brighter accents */
+/* v3 Gradient Blobs — original v3 composition, no cyan */
 :root[data-version="v3"] {
   --grad-blobs:
-    /* ===== BASE: Forest — deep anchors (v1 style) ===== */
+    /* ===== BASE: Forest — deep anchors ===== */
     radial-gradient(ellipse 60% 55% at 15% 25%,
       #2d6b44 0%,
       #2d6b44 35%,
@@ -251,7 +251,7 @@ body {
       #2d6b44 30%,
       transparent 72%),
     
-    /* ===== MAIN GREEN: Moss — sweeping diagonal + organic masses (v1 style) ===== */
+    /* ===== MAIN GREEN: Moss — sweeping diagonal + organic masses ===== */
     linear-gradient(118deg,
       transparent 25%,
       #80b579 42%,
@@ -270,70 +270,55 @@ body {
       #80b579 30%,
       transparent 65%),
     
-    /* ===== ACCENT PINK: Top-right zone — organic masses (v1 style) ===== */
+    /* ===== ACCENT PINK: Top-right zone — organic masses ===== */
     radial-gradient(ellipse 32% 28% at 78% 22%,
-      #f5bce6 0%,
-      #f5bce6 40%,
+      #f5b3d5e6 0%,
+      #f5b3d5e6 40%,
       transparent 68%),
     radial-gradient(ellipse 22% 18% at 62% 36%,
-      #f5bce6 0%,
-      #f5bce6 30%,
+      #f5b3d5e6 0%,
+      #f5b3d5e6 30%,
       transparent 60%),
     radial-gradient(ellipse 16% 20% at 68% 48%,
-      #f5bce6 0%,
-      #f5bce6 25%,
+      #f5b3d5e6 0%,
+      #f5b3d5e6 25%,
       transparent 58%),
     
-    /* ===== ACCENT CYAN: Bottom-left zone — organic masses (v1 style, larger) ===== */
+    /* ===== ACCENT ORANGE: Bottom-left zone — takes the old cyan slot ===== */
     radial-gradient(ellipse 36% 32% at 22% 76%,
-      #b8e5f3 0%,
-      #b8e5f3 42%,
+      #f7b380e6 0%,
+      #f7b380e6 42%,
       transparent 70%),
     radial-gradient(ellipse 26% 22% at 38% 62%,
-      #b8e5f3 0%,
-      #b8e5f3 35%,
+      #f7b380e6 0%,
+      #f7b380e6 35%,
       transparent 62%),
     radial-gradient(ellipse 20% 18% at 44% 56%,
-      #b8e5f3 0%,
-      #b8e5f3 28%,
+      #f7b380e6 0%,
+      #f7b380e6 28%,
       transparent 58%),
     
     /* ===== ACCENT GREEN: Center cluster ===== */
     radial-gradient(ellipse 30% 24% at 50% 48%,
-      #a2cf81 0%,
-      #a2cf81 45%,
+      #9dc672 0%,
+      #9dc672 45%,
       transparent 68%),
     radial-gradient(ellipse 22% 18% at 44% 34%,
-      #a2cf81 0%,
-      #a2cf81 35%,
+      #9dc672 0%,
+      #9dc672 35%,
       transparent 62%),
     radial-gradient(ellipse 18% 20% at 56% 56%,
-      #a2cf81 0%,
-      #a2cf81 30%,
+      #9dc672 0%,
+      #9dc672 30%,
       transparent 60%),
-    
-    /* ===== ACCENT ORANGE: Right edge, between the pink and the ink ===== */
-    radial-gradient(ellipse 30% 26% at 88% 46%,
-      #f7c3a1 0%,
-      #f7c3a1 40%,
-      transparent 68%),
-    radial-gradient(ellipse 20% 18% at 80% 58%,
-      #f7c3a1 0%,
-      #f7c3a1 32%,
-      transparent 62%),
-    radial-gradient(ellipse 16% 18% at 90% 62%,
-      #f7c3a1 0%,
-      #f7c3a1 28%,
-      transparent 58%),
     
     /* ===== EDGE CONVERGENCE ===== */
     conic-gradient(from 88deg at 50% -8%,
       transparent 0deg,
       #80b579 12deg,
-      #b8e5f3 35deg,
-      #f5bce6 58deg,
-      #a2cf81 82deg,
-      #2d6b44 105deg,
+      #f5b3d5 48deg,
+      #9dc672 78deg,
+      #2d6b44 102deg,
       transparent 125deg),
     
     /* ===== INK ANCHORS ===== */

@@ -43,10 +43,9 @@ const v2Splashes = [
 ];
 
 const v3Splashes = [
-  { name: "Accent Green", hex: "#A2CF81" },
-  { name: "Accent Pink", hex: "#F5BCE6" },
-  { name: "Accent Cyan", hex: "#B8E5F3" },
-  { name: "Accent Orange", hex: "#F7C3A1" },
+  { name: "Accent Green", hex: "#9DC672" },
+  { name: "Accent Pink", hex: "#F5B3D5" },
+  { name: "Accent Orange", hex: "#F7B380" },
 ];
 
 /* ---------------- Helpers ---------------- */
