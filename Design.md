@@ -28,7 +28,7 @@ Gradient accents — gradients only, never fills or text. Each sits midway betwe
 
 | Accent Green | Accent Pink | Accent Orange |
 |---|---|---|
-| `#9DC672` | `#F5B3D5` | `#F7B380` |
+| `#9DC672` | `#F5B3BE` | `#F7B380` |
 
 Text hierarchy comes from opacity, not extra greys: secondary `60–70%`, labels `50%`, placeholders `40%`.
 
@@ -194,7 +194,7 @@ Uses the exact v2 composition — same layer stack, same positions, same blur/co
 
 1. Base greens are the v1↔v2 midpoints (`#2D6B44` forest, `#80B579` moss).
 2. Cyan removed; its bottom-left slot becomes accent orange (`#F7B380` at 75% opacity).
-3. Pink (`#F5B3D5` at 90%) and orange inherit the old cyan slot's size/placement; green (`#9DC672` at 100%) keeps the centre cluster.
+3. Pink (`#F5B3BE` at 90%) and orange inherit the old cyan slot's size/placement; green (`#9DC672` at 100%) keeps the centre cluster.
 
 ```
 base: #2D6B44; inset: -15%; filter: blur(2px) contrast(1.2)
@@ -217,11 +217,11 @@ radial-gradient(ellipse 28% 32% at 70% 62%,
 
 /* ===== ACCENT PINK: Top-right zone ===== */
 radial-gradient(ellipse 32% 28% at 78% 22%,
-  #F5B3D5BF 0%, #F5B3D5BF 40%, transparent 68%),
+  #F5B3BEBF 0%, #F5B3BEBF 40%, transparent 68%),
 radial-gradient(ellipse 22% 18% at 62% 36%,
-  #F5B3D5BF 0%, #F5B3D5BF 30%, transparent 60%),
+  #F5B3BEBF 0%, #F5B3BEBF 30%, transparent 60%),
 radial-gradient(ellipse 16% 20% at 68% 48%,
-  #F5B3D5BF 0%, #F5B3D5BF 25%, transparent 58%)
+  #F5B3BEBF 0%, #F5B3BEBF 25%, transparent 58%)
 
 /* ===== ACCENT ORANGE: Bottom-left zone (replaces cyan) ===== */
 radial-gradient(ellipse 36% 32% at 22% 76%,
@@ -243,7 +243,7 @@ radial-gradient(ellipse 18% 20% at 56% 56%,
 conic-gradient(from 88deg at 50% -8%,
   transparent 0deg,
   #80B579 12deg,
-  #F5B3D5BF 48deg,
+  #F5B3BEBF 48deg,
   #9DC672 78deg,
   #2D6B44 102deg,
   transparent 125deg)

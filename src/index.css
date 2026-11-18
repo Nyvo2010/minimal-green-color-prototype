@@ -272,16 +272,16 @@ body {
     
     /* ===== ACCENT PINK: Top-right zone — organic masses ===== */
     radial-gradient(ellipse 32% 28% at 78% 22%,
-      #f5b3d5bf 0%,
-      #f5b3d5bf 40%,
+      #f5b3bebf 0%,
+      #f5b3bebf 40%,
       transparent 68%),
     radial-gradient(ellipse 22% 18% at 62% 36%,
-      #f5b3d5bf 0%,
-      #f5b3d5bf 30%,
+      #f5b3bebf 0%,
+      #f5b3bebf 30%,
       transparent 60%),
     radial-gradient(ellipse 16% 20% at 68% 48%,
-      #f5b3d5bf 0%,
-      #f5b3d5bf 25%,
+      #f5b3bebf 0%,
+      #f5b3bebf 25%,
       transparent 58%),
     
     /* ===== ACCENT ORANGE: Bottom-left zone — takes the old cyan slot ===== */
